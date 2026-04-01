@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Section, Card, Button } from "./ui/Base";
 import { ARTISTS, RELEASES, EVENTS } from "../constants/data";
 import { Instagram, Music, ExternalLink, MapPin, Calendar as CalendarIcon, ArrowRight } from "lucide-react";

@@ -1,3 +1,4 @@
+
 export interface Artist {
   id: string;
   name: string;
@@ -21,6 +22,7 @@ export interface Release {
   cover: string;
   type: 'Album' | 'EP' | 'Single' | 'Compilation';
   link: string;
+  bandcampUrl?: string; // <-- optional Bandcamp URL
 }
 
 export interface Event {
@@ -38,9 +40,9 @@ export const ARTISTS: Artist[] = [
   {
     id: 'live-1',
     name: 'Gray Matter',
-    bio: 'Cerebral techno focused on precision and psychological impact.',
-    image: 'https://picsum.photos/seed/graymatter/800/800',
-    genres: ['Minimal Techno', 'Cerebral'],
+    bio: 'Sound Manipulator - Light Calculator - Time Travel Participator.',
+    image: 'images/artists/liveActs/grayMatter.jpg',
+    genres: ['Experimental','Psychedelic'],
     featured: true,
     category: 'Live',
     socials: { instagram: '#', spotify: '#' }
@@ -49,8 +51,8 @@ export const ARTISTS: Artist[] = [
     id: 'live-2',
     name: 'Blether',
     bio: 'Raw, unfiltered energy and distorted frequencies for the peak time.',
-    image: 'https://picsum.photos/seed/blether/800/800',
-    genres: ['Industrial Techno', 'Raw'],
+    image: '/images/artists/liveActs/blether.jpg',
+    genres: ['Twilight Nightpsy'],
     featured: false,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
@@ -59,8 +61,8 @@ export const ARTISTS: Artist[] = [
     id: 'live-3',
     name: 'Skörgen',
     bio: 'Hypnotic soundscapes and deep rhythmic explorations.',
-    image: 'https://picsum.photos/seed/skorgen/800/800',
-    genres: ['Deep Techno', 'Hypnotic'],
+    image: '/images/artists/liveActs/skorgen.png',
+    genres: ['Forest'],
     featured: true,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
@@ -69,8 +71,8 @@ export const ARTISTS: Artist[] = [
     id: 'live-4',
     name: 'Voidwalker',
     bio: 'Experimental soundscapes and industrial-tinged atmospheric techno.',
-    image: 'https://picsum.photos/seed/voidwalker/800/800',
-    genres: ['Experimental', 'Industrial Techno'],
+    image: '/images/artists/liveActs/voidwalker.jpg',
+    genres: ['Organic Darkpsy'],
     featured: false,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
@@ -79,8 +81,8 @@ export const ARTISTS: Artist[] = [
     id: 'live-5',
     name: 'Phylth',
     bio: 'Gritty, dark, and uncompromising sound design from the urban abyss.',
-    image: 'https://picsum.photos/seed/phylth/800/800',
-    genres: ['Dark Techno', 'Gritty'],
+    image: '/images/artists/liveActs/phylth.jpg',
+    genres: ['Twilight Fullon'],
     featured: true,
     category: 'Live',
     socials: { soundcloud: '#', spotify: '#' }
@@ -89,7 +91,7 @@ export const ARTISTS: Artist[] = [
     id: 'live-6',
     name: 'Jahshua',
     bio: 'Spiritual frequencies and deep bass explorations.',
-    image: 'https://picsum.photos/seed/jahshua/800/800',
+    image: '/images/artists/liveActs/jahshua.jpg',
     genres: ['Dub Techno', 'Spiritual'],
     featured: false,
     category: 'Live',
@@ -110,7 +112,7 @@ export const ARTISTS: Artist[] = [
     id: 'dj-2',
     name: 'Killer B',
     bio: 'High-energy selections and relentless groove.',
-    image: 'https://picsum.photos/seed/killerb/800/800',
+    image: '/images/artists/dj/killerB.jpg',
     genres: ['Hard Techno', 'Groove'],
     featured: true,
     category: 'DJ',
@@ -120,7 +122,7 @@ export const ARTISTS: Artist[] = [
     id: 'dj-3',
     name: 'Akuum',
     bio: 'Deep hypnotic techno with psychedelic textures and tribal rhythms.',
-    image: 'https://picsum.photos/seed/akuum/800/800',
+    image: '/images/artists/dj/akuum.jpg',
     genres: ['Hypnotic Techno', 'Tribal'],
     featured: false,
     category: 'DJ',
@@ -130,7 +132,7 @@ export const ARTISTS: Artist[] = [
     id: 'dj-4',
     name: 'A Geoffrey',
     bio: 'Intricate soundscapes and rhythmic complexity from the depths of the underground.',
-    image: 'https://picsum.photos/seed/ageoffrey/800/800',
+    image: '/images/artists/dj/aGeoffrey.jpg',
     genres: ['Techno', 'Experimental'],
     featured: false,
     category: 'DJ',
@@ -138,9 +140,9 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-5',
-    name: 'Profound / Comps Mentis',
+    name: 'Profound',
     bio: 'Deeply resonant basslines and spiritual melodies for the soul.',
-    image: 'https://picsum.photos/seed/profound/800/800',
+    image: '/images/artists/dj/profound.jpg',
     genres: ['Melodic Techno', 'Deep'],
     featured: true,
     category: 'DJ',
@@ -150,7 +152,7 @@ export const ARTISTS: Artist[] = [
     id: 'dj-6',
     name: 'Intropin',
     bio: 'Fast-paced rhythmic structures and cerebral textures.',
-    image: 'https://picsum.photos/seed/intropin/800/800',
+    image: '/images/artists/dj/intropin.png',
     genres: ['Fast Techno', 'Cerebral'],
     featured: false,
     category: 'DJ',
@@ -175,16 +177,17 @@ export const RELEASES: Release[] = [
     title: 'Acid Bubble',
     artist: 'Key To Insaniity',
     date: '2024-03-15',
-    cover: '/images/albums/acidBubble.avif',
+    cover: '/images/music/albums/acidBubble.avif',
     type: 'Album',
-    link: '#'
+    link: '#',
+    bandcampUrl: 'https://statealchemymusic.bandcamp.com/album/album-acid-bubble'
   },
   {
     id: 'alb-2',
     title: 'Potion of Emotion',
     artist: 'Gray Matter',
     date: '2024-02-10',
-    cover: '/images/albums/potionOfEmotion.avif',
+    cover: '/images/music/albums/potionOfEmotion.avif',
     type: 'Album',
     link: '#'
   },
@@ -194,7 +197,7 @@ export const RELEASES: Release[] = [
     title: 'A Serenade Amidst Snowfall',
     artist: 'ZDLCK',
     date: '2024-01-20',
-    cover: '/images/ep/aSerenadeAmidstSnowfall.avif',
+    cover: '/images/music/ep/aSerenadeAmidstSnowfall.avif',
     type: 'EP',
     link: '#'
   },
@@ -203,7 +206,7 @@ export const RELEASES: Release[] = [
     title: 'Chronoform',
     artist: 'Blether',
     date: '2023-12-05',
-    cover: '/images/ep/chronoform.avif',
+    cover: '/images/music/ep/chronoform.avif',
     type: 'EP',
     link: '#'
   },
@@ -212,7 +215,7 @@ export const RELEASES: Release[] = [
     title: 'Voidrealm',
     artist: 'Voidwalker',
     date: '2023-11-15',
-    cover: '/images/ep/voidrealm.avif',
+    cover: '/images/music/ep/voidrealm.avif',
     type: 'EP',
     link: '#'
   },
@@ -221,7 +224,7 @@ export const RELEASES: Release[] = [
     title: 'Electric Boogie Machine',
     artist: 'Phylth',
     date: '2023-10-20',
-    cover: '/images/ep/electricBoogieMachine.avif',
+    cover: '/images/music/ep/electricBoogieMachine.avif',
     type: 'EP',
     link: '#'
   },
@@ -230,7 +233,7 @@ export const RELEASES: Release[] = [
     title: 'Why Not?',
     artist: 'Key To Insaniity',
     date: '2023-09-10',
-    cover: '/images/ep/whyNot.avif',
+    cover: '/images/music/ep/whyNot.avif',
     type: 'EP',
     link: '#'
   },
@@ -239,7 +242,7 @@ export const RELEASES: Release[] = [
     title: 'Moss Monkey',
     artist: 'Killawatt',
     date: '2023-08-05',
-    cover: '/images/ep/mossMonkey.avif',
+    cover: '/images/music/ep/mossMonkey.avif',
     type: 'EP',
     link: '#'
   },
@@ -248,7 +251,7 @@ export const RELEASES: Release[] = [
     title: 'Africhemy',
     artist: 'Compos Mentis',
     date: '2023-07-15',
-    cover: '/images/ep/africhemy.avif',
+    cover: '/images/music/ep/africhemy.avif',
     type: 'EP',
     link: '#'
   },
@@ -257,7 +260,7 @@ export const RELEASES: Release[] = [
     title: 'Trollstigen',
     artist: 'Skörgen',
     date: '2023-06-20',
-    cover: '/images/ep/trollstigen.avif',
+    cover: '/images/music/ep/trollstigen.avif',
     type: 'EP',
     link: '#'
   },
@@ -266,7 +269,7 @@ export const RELEASES: Release[] = [
     title: 'Self Control',
     artist: 'Gray Matter',
     date: '2023-04-14',
-    cover: '/images/ep/selfControl.avif',
+    cover: '/images/music/ep/selfControl.avif',
     type: 'EP',
     link: '#'
   },
@@ -276,7 +279,7 @@ export const RELEASES: Release[] = [
     title: 'Strange Radio',
     artist: 'Killer B, Hegchick',
     date: '2023-05-10',
-    cover: '/images/singles/strangeRadio.avif',
+    cover: '/images/music/singles/strangeRadio.avif',
     type: 'Single',
     link: '#'
   },
@@ -285,7 +288,7 @@ export const RELEASES: Release[] = [
     title: 'You People',
     artist: 'Voidwalker',
     date: '2023-04-15',
-    cover: '/images/singles/youPeople.avif',
+    cover: '/images/music/singles/youPeople.avif',
     type: 'Single',
     link: '#'
   },
@@ -294,7 +297,7 @@ export const RELEASES: Release[] = [
     title: 'Turkish Delight',
     artist: 'Akuum',
     date: '2023-11-02',
-    cover: '/images/singles/turkishDelight.avif',
+    cover: '/images/music/singles/turkishDelight.avif',
     type: 'Single',
     link: '#'
   },
@@ -303,7 +306,7 @@ export const RELEASES: Release[] = [
     title: 'Woogie Bonderland',
     artist: 'Blether',
     date: '2023-05-01',
-    cover: '/images/singles/woogieBonderland.avif',
+    cover: '/images/music/singles/woogieBonderland.avif',
     type: 'Single',
     link: '#'
   },
@@ -313,16 +316,7 @@ export const RELEASES: Release[] = [
     title: 'Best of 2 Years',
     artist: 'Various Artists',
     date: '2023-03-20',
-    cover: '/images/singles/', // come back here
-    type: 'Compilation',
-    link: '#'
-  },
-  {
-    id: 'comp-2',
-    title: 'Forgotten Fynbos',
-    artist: 'ZDLCK',
-    date: '2023-02-10',
-    cover: 'https://picsum.photos/seed/fynbos/700/700',
+    cover: '/images/music/compilations/bestOf2Years.avif',
     type: 'Compilation',
     link: '#'
   },
@@ -331,7 +325,7 @@ export const RELEASES: Release[] = [
     title: 'Stroke the Furry Bassline',
     artist: 'Various Artists',
     date: '2023-01-05',
-    cover: 'https://picsum.photos/seed/furrybass/700/700',
+    cover: '/images/music/compilations/strokeTheFurryBassline.avif',
     type: 'Compilation',
     link: '#'
   },
@@ -340,7 +334,7 @@ export const RELEASES: Release[] = [
     title: 'Local is Lekker',
     artist: 'Various Artists',
     date: '2022-12-15',
-    cover: 'https://picsum.photos/seed/localislekker/700/700',
+    cover: '/images/music/compilations/localIsLekker.avif',
     type: 'Compilation',
     link: '#'
   }

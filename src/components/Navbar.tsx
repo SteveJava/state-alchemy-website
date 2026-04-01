@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -26,6 +26,8 @@ const NAV_LINKS = [
   { name: 'Events', href: '/#events' },
   { name: 'About', href: '/#about' },
 ];
+
+import { AnimatePresence } from 'framer-motion';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
