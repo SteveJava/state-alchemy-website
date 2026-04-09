@@ -20,7 +20,6 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
     <Section 
       id="artists" 
       title={category ? `${category} Acts` : (featuredOnly ? "Featured Alchemists" : "The Alchemists")} 
-      subtitle={category ? "Roster" : (featuredOnly ? "Featured Artists" : "Full Roster")}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {displayArtists.map((artist, idx) => (
@@ -36,7 +35,7 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
                 <img 
                   src={artist.image} 
                   alt={artist.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
@@ -80,17 +79,17 @@ interface ReleasesSectionProps {
 
 export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
   let displayReleases = type ? RELEASES.filter(r => r.type === type) : RELEASES;
+  displayReleases = displayReleases.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  displayReleases = displayReleases.slice(0, 3);
   
-  if (limit) {
-    displayReleases = displayReleases.slice(0, limit);
-  }
 
   const getTitle = () => {
     if (type === 'Album') return "Full Length Journeys";
     if (type === 'EP') return "Extended Plays";
     if (type === 'Single') return "Sonic Fragments";
     if (type === 'Compilation') return "Collective Artifacts";
-    return "Sonic Artifacts";
+    return "Latest Releases";
   };
 
   const getSubtitle = () => {
@@ -102,7 +101,7 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
   };
 
   return (
-    <Section id="releases" title={getTitle()} subtitle={getSubtitle()} className="bg-white/[0.02]">
+    <Section id="releases" title={getTitle()} className="bg-white/[0.02]">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayReleases.map((release, idx) => (
           <motion.div
@@ -112,6 +111,7 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
             transition={{ delay: idx * 0.1 }}
             viewport={{ once: true }}
           >
+          <Link to={`/releases/${release.slug}`}>
             <Card className="group h-full flex flex-col">
               <div className="aspect-square overflow-hidden relative flex-shrink-0">
                 <img 
@@ -119,11 +119,6 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
                   alt={release.title} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                  <Button variant="primary" className="flex items-center gap-2">
-                    Listen <ExternalLink className="w-4 h-4" />
-                  </Button>
-                </div>
               </div>
               <div className="p-6 flex-grow flex flex-col justify-between">
                 <div>
@@ -138,6 +133,7 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
                 </div>
               </div>
             </Card>
+          </Link>
           </motion.div>
         ))}
       </div>
@@ -171,7 +167,7 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
 };
 
 export const EventsSection = () => (
-  <Section id="events" title="Rituals" subtitle="Upcoming Events">
+  <Section id="events" title="Rituals">
     <div className="space-y-4">
       {EVENTS.map((event, idx) => (
         <motion.div

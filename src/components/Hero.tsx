@@ -50,7 +50,7 @@ export const Hero = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-lg md:text-xl text-brand-text-muted mb-10 max-w-2xl mx-auto leading-relaxed"
         >
-          A new-age music collective that was born through the love of the Psychedelic scene and culture.
+          A Psychedelic Trance Record Label that was launched in 2023 through an undying love and passion for psychedelic music and culture.
         </motion.p>
 
         <motion.div

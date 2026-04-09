@@ -22,7 +22,11 @@ export interface Release {
   cover: string;
   type: 'Album' | 'EP' | 'Single' | 'Compilation';
   link: string;
-  bandcampUrl?: string; // <-- optional Bandcamp URL
+  slug?: string;
+  tracks?: {
+    title: string;
+    url: string;
+  }[];
 }
 
 export interface Event {
@@ -45,7 +49,7 @@ export const ARTISTS: Artist[] = [
     genres: ['Experimental','Psychedelic'],
     featured: true,
     category: 'Live',
-    socials: { instagram: '#', spotify: '#' }
+    socials: { instagram: 'https://www.instagram.com/graymatter_statealchemy/', spotify: '#' }
   },
   {
     id: 'live-2',
@@ -63,7 +67,7 @@ export const ARTISTS: Artist[] = [
     bio: 'Hypnotic soundscapes and deep rhythmic explorations.',
     image: '/images/artists/liveActs/skorgen.png',
     genres: ['Forest'],
-    featured: true,
+    featured: false,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
   },
@@ -73,7 +77,7 @@ export const ARTISTS: Artist[] = [
     bio: 'Experimental soundscapes and industrial-tinged atmospheric techno.',
     image: '/images/artists/liveActs/voidwalker.jpg',
     genres: ['Organic Darkpsy'],
-    featured: false,
+    featured: true,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
   },
@@ -114,7 +118,7 @@ export const ARTISTS: Artist[] = [
     bio: 'High-energy selections and relentless groove.',
     image: '/images/artists/dj/killerB.jpg',
     genres: ['Hard Techno', 'Groove'],
-    featured: true,
+    featured: false,
     category: 'DJ',
     socials: { instagram: '#', soundcloud: '#' }
   },
@@ -176,93 +180,103 @@ export const RELEASES: Release[] = [
     id: 'alb-1',
     title: 'Acid Bubble',
     artist: 'Key To Insaniity',
-    date: '2024-03-15',
+    date: '2025-11-21',
     cover: '/images/music/albums/acidBubble.avif',
     type: 'Album',
     link: '#',
-    bandcampUrl: 'https://statealchemymusic.bandcamp.com/album/album-acid-bubble'
+    slug: 'acid-bubble',
   },
   {
     id: 'alb-2',
     title: 'Potion of Emotion',
     artist: 'Gray Matter',
-    date: '2024-02-10',
+    date: '2025-02-21',
     cover: '/images/music/albums/potionOfEmotion.avif',
     type: 'Album',
-    link: '#'
+    link: '#',
+    slug: 'potion-of-emotion'
   },
+
   // EPs
   {
     id: 'ep-1',
     title: 'A Serenade Amidst Snowfall',
     artist: 'ZDLCK',
-    date: '2024-01-20',
+    date: '2025-08-01',
     cover: '/images/music/ep/aSerenadeAmidstSnowfall.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'a-serenade-amidst-snowfall'
   },
   {
     id: 'ep-2',
     title: 'Chronoform',
     artist: 'Blether',
-    date: '2023-12-05',
+    date: '2025-07-04',
     cover: '/images/music/ep/chronoform.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'chronoform'
   },
   {
     id: 'ep-3',
     title: 'Voidrealm',
     artist: 'Voidwalker',
-    date: '2023-11-15',
+    date: '2025-03-21',
     cover: '/images/music/ep/voidrealm.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'voidrealm'
   },
   {
     id: 'ep-4',
     title: 'Electric Boogie Machine',
     artist: 'Phylth',
-    date: '2023-10-20',
+    date: '2024-09-20',
     cover: '/images/music/ep/electricBoogieMachine.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'electric-boogie-machine'
   },
   {
     id: 'ep-5',
     title: 'Why Not?',
     artist: 'Key To Insaniity',
-    date: '2023-09-10',
+    date: '2024-07-12',
     cover: '/images/music/ep/whyNot.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'why-not'
   },
   {
     id: 'ep-6',
     title: 'Moss Monkey',
     artist: 'Killawatt',
-    date: '2023-08-05',
+    date: '2024-03-14',
     cover: '/images/music/ep/mossMonkey.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'moss-monkey'
   },
   {
     id: 'ep-7',
     title: 'Africhemy',
     artist: 'Compos Mentis',
-    date: '2023-07-15',
+    date: '2024-01-28',
     cover: '/images/music/ep/africhemy.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'africhemy'
   },
   {
     id: 'ep-8',
     title: 'Trollstigen',
     artist: 'Skörgen',
-    date: '2023-06-20',
+    date: '2023-12-15',
     cover: '/images/music/ep/trollstigen.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'trollstigen'
   },
   {
     id: 'ep-9',
@@ -271,26 +285,30 @@ export const RELEASES: Release[] = [
     date: '2023-04-14',
     cover: '/images/music/ep/selfControl.avif',
     type: 'EP',
-    link: '#'
+    link: '#',
+    slug: 'self-control'
   },
+
   // Singles
   {
     id: 's-1',
     title: 'Strange Radio',
     artist: 'Killer B, Hegchick',
-    date: '2023-05-10',
+    date: '2025-06-27',
     cover: '/images/music/singles/strangeRadio.avif',
     type: 'Single',
-    link: '#'
+    link: '#',
+    slug: 'strange-radio'
   },
   {
     id: 's-2',
     title: 'You People',
     artist: 'Voidwalker',
-    date: '2023-04-15',
+    date: '2024-04-19',
     cover: '/images/music/singles/youPeople.avif',
     type: 'Single',
-    link: '#'
+    link: '#',
+    slug: 'you-people'
   },
   {
     id: 's-3',
@@ -299,7 +317,8 @@ export const RELEASES: Release[] = [
     date: '2023-11-02',
     cover: '/images/music/singles/turkishDelight.avif',
     type: 'Single',
-    link: '#'
+    link: '#',
+    slug: 'turkish-delight'
   },
   {
     id: 's-4',
@@ -308,54 +327,79 @@ export const RELEASES: Release[] = [
     date: '2023-05-01',
     cover: '/images/music/singles/woogieBonderland.avif',
     type: 'Single',
-    link: '#'
+    link: '#',
+    slug: 'woogie-bonderland'
   },
+
   // Compilations
   {
     id: 'comp-1',
     title: 'Best of 2 Years',
     artist: 'Various Artists',
-    date: '2023-03-20',
+    date: '2025-05-02',
     cover: '/images/music/compilations/bestOf2Years.avif',
     type: 'Compilation',
-    link: '#'
+    link: '#',
+    slug: 'best-of-2-years'
   },
   {
     id: 'comp-3',
     title: 'Stroke the Furry Bassline',
     artist: 'Various Artists',
-    date: '2023-01-05',
+    date: '2025-01-24',
     cover: '/images/music/compilations/strokeTheFurryBassline.avif',
     type: 'Compilation',
-    link: '#'
+    link: '#',
+    slug: 'stroke-the-furry-bassline'
   },
   {
     id: 'comp-4',
     title: 'Local is Lekker',
     artist: 'Various Artists',
-    date: '2022-12-15',
+    date: '2024-05-16',
     cover: '/images/music/compilations/localIsLekker.avif',
     type: 'Compilation',
-    link: '#'
+    link: '#',
+    slug: 'local-is-lekker'
+  },
+  {
+    id: 'comp-5',
+    title: 'Equilibrium',
+    artist: 'Various Artists',
+    date: '2023-08-18',
+    cover: '/images/music/compilations/equilibrium.avif',
+    type: 'Compilation',
+    link: '#',
+    slug: 'equilibrium'
+  },
+  {
+    id: 'comp-6',
+    title: 'Forgotten Fynbos',
+    artist: 'Various Artists',
+    date: '2025-04-04',
+    cover: '/images/music/compilations/forgottenFynbos.avif',
+    type: 'Compilation',
+    link: '#',
+    slug: 'forgotten-fynbos'
   }
-];
+];  
 
 export const EVENTS: Event[] = [
   {
     id: 'e1',
-    title: 'State Alchemy: Equinox',
-    date: '2024-04-20',
-    location: 'Berlin, DE',
-    venue: 'Tresor (Vault)',
-    image: 'https://picsum.photos/seed/berlin/1200/600',
+    title: 'State Alchemy Festival',
+    date: '2025-10-25',
+    location: 'Western Cape',
+    venue: 'Rawsonville',
+    image: 'images/events/stateAlchemyFestival/cover.JPG',
     link: '#'
   },
   {
     id: 'e2',
-    title: 'Deep Frequency Ritual',
-    date: '2024-05-12',
-    location: 'London, UK',
-    venue: 'Village Underground',
+    title: 'The State Alchemists Record Label Evening',
+    date: '2025-08-2',
+    location: 'Cape Town',
+    venue: 'Colorbox Studios',
     image: 'https://picsum.photos/seed/london/1200/600',
     link: '#'
   },
