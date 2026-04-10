@@ -14,6 +14,12 @@ export interface Artist {
   };
 }
 
+export interface Track {
+  id: string;
+  title: string;
+  audioSrc: string;
+}
+
 export interface Release {
   id: string;
   title: string;
@@ -23,10 +29,12 @@ export interface Release {
   type: 'Album' | 'EP' | 'Single' | 'Compilation';
   link: string;
   slug?: string;
-  tracks?: {
-    title: string;
-    url: string;
-  }[];
+  description?: string;
+  bandcamp?: {
+    type: 'album' | 'track';
+    id: string;
+  };
+  tracks?: Track[];
 }
 
 export interface Event {
@@ -185,6 +193,19 @@ export const RELEASES: Release[] = [
     type: 'Album',
     link: '#',
     slug: 'acid-bubble',
+    description:
+      "Key To Insaniity drops debut full length album 'Acid Bubble' !! This is an 8-track trip built to shatter the ceiling between sub-genres. It's concentrated, high-BPM fuel for the floor—a psychedelic pressure cooker where every sonic layer is designed for maximum punch. This meticulously crafted piece of alien audio is a true reflection of an insight into the mind of one of South Africa's hottest producers! Take the flow and groove of conventional psy, and fuse it with the pounding high speed power of hitech beats and you complete Insaniity!! Featuring a collaboration track with another one of our label artist's ZDLCK, fusing the organic with the mechanical to form something of a true unique nature. Please lose your mind with us and dive right into this masterpiece! Strap in for the ride.",
+    bandcamp: {
+      type: 'album',
+      id: '3220687225'
+    },
+    tracks: [
+      { 
+        id: "t1",
+        title: 'Code Cannabis' ,
+        audioSrc: 'audio/albums/acidBubble/codeCannabis.mp3'
+      },
+    ]
   },
   {
     id: 'alb-2',

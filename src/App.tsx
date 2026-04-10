@@ -4,6 +4,8 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { useEffect } from "react";
+import { motion, useScroll, useSpring } from "motion/react";
 
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -11,9 +13,7 @@ import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import Artists from "./pages/Artists";
 import ReleasesPage from "./pages/ReleasesPage";
-
-import { motion, useScroll, useSpring } from "motion/react";
-import { useEffect } from "react";
+import AcidBubble from "./pages/AcidBubble";
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -48,8 +48,6 @@ export default function App() {
       <ScrollToTop />
 
       <div className="relative min-h-screen selection:bg-brand-primary/30 selection:text-white">
-        
-        {/* Progress Bar */}
         <motion.div
           className="fixed top-0 left-0 right-0 h-1 bg-brand-primary z-[60] origin-left"
           style={{ scaleX }}
@@ -62,6 +60,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/releases" element={<ReleasesPage />} />
+            <Route path="/releases/acid-bubble" element={<AcidBubble />} />
           </Routes>
         </main>
 

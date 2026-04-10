@@ -17,11 +17,8 @@ export default function ReleasesPage() {
 
   return (
     <div className="min-h-screen pt-28 px-10">
-      
-      {/* Header */}
       <h1 className="text-4xl font-bold mb-6">Releases</h1>
 
-      {/* Filter Buttons */}
       <div className="flex flex-wrap gap-3 mb-10">
         {filters.map((f) => (
           <button
@@ -38,7 +35,6 @@ export default function ReleasesPage() {
         ))}
       </div>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredReleases.map((release, idx) => (
           <motion.div
@@ -47,18 +43,22 @@ export default function ReleasesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.05 }}
           >
-            <Link to={'/releases/${release.id}'}>
+            <Link
+              to={
+                release.title === "Acid Bubble"
+                  ? "/releases/acid-bubble"
+                  : "/releases"
+              }
+            >
               <div className="group cursor-pointer">
-                
-                {/* Cover */}
                 <div className="aspect-square overflow-hidden rounded-xl">
                   <img
                     src={release.cover}
+                    alt={`${release.title} cover`}
                     className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                   />
                 </div>
 
-                {/* Info */}
                 <div className="mt-3">
                   <h3 className="text-lg font-bold group-hover:text-brand-primary transition">
                     {release.title}
@@ -70,7 +70,6 @@ export default function ReleasesPage() {
                     {release.type} • {release.date}
                   </p>
                 </div>
-
               </div>
             </Link>
           </motion.div>

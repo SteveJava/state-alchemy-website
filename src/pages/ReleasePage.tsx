@@ -1,45 +1,38 @@
 import { useParams } from "react-router-dom";
 import { RELEASES } from "../constants/data";
-import { useState } from "react";
 
 export default function ReleasePage() {
-  const { id } = useParams();
-  const release = RELEASES.find((r) => r.id === id);
-
-  const [currentTrack, setCurrentTrack] = useState<string | null>(null);
-
-  if (!release) return <div className="p-10">Not found</div>;
+  const release = RELEASES.find((r) => r.slug === "acid-bubble");
+  if (!release) {
+    return <div className="p-10 text-white">Release not found</div>;
+  }
 
   return (
-    <div className="min-h-screen p-10 max-w-4xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-6 md:px-10 max-w-6xl mx-auto text-white">
+      <h1 className="text-4xl font-bold mb-4">{release.title}</h1>
+      <p className="mb-2">{release.artist}</p>
+      <p className="mb-6">{release.type} • {release.date}</p>
 
-      {/* Header */}
       <img
         src={release.cover}
+        alt={`${release.title} cover art`}
         className="w-full max-w-md rounded-xl mb-6"
       />
 
-      <h1 className="text-3xl font-bold">{release.title}</h1>
-      <p className="text-brand-text-muted">{release.artist}</p>
+      <p className="mb-6">
+        {release.description ?? "Description coming soon."}
+      </p>
 
-      {/* Tracklist */}
-      <div className="mt-8 space-y-3">
-        {release.tracks?.map((track, idx) => (
-          <div
-            key={idx}
-            onClick={() => setCurrentTrack(track.url)}
-            className="p-3 border border-white/10 rounded-lg cursor-pointer hover:border-white/40 transition"
-          >
-            {track.title}
-          </div>
-        ))}
-      </div>
+      <h2 className="text-2xl font-semibold mb-3">Tracklist</h2>
 
-      {/* Player */}
-      {currentTrack && (
-        <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-white/10 p-4">
-          <audio controls autoPlay src={currentTrack} className="w-full" />
-        </div>
+      {release.tracks?.length ? (
+        <ul className="space-y-2">
+          {release.tracks.map((track) => (
+            <li key={track.id}>{track.title}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No tracks yet.</p>
       )}
     </div>
   );
