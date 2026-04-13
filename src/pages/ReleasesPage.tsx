@@ -43,13 +43,7 @@ export default function ReleasesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.05 }}
           >
-            <Link
-              to={
-                release.title === "Acid Bubble"
-                  ? "/releases/acid-bubble"
-                  : "/releases"
-              }
-            >
+            <Link to={`/releases/${release.slug}`}>
               <div className="group cursor-pointer">
                 <div className="aspect-square overflow-hidden rounded-xl">
                   <img

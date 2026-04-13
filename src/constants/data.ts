@@ -136,7 +136,7 @@ export const ARTISTS: Artist[] = [
     bio: 'Deep hypnotic techno with psychedelic textures and tribal rhythms.',
     image: '/images/artists/dj/akuum.jpg',
     genres: ['Hypnotic Techno', 'Tribal'],
-    featured: false,
+    featured: true,
     category: 'DJ',
     socials: { soundcloud: '#', spotify: '#' }
   },
@@ -156,7 +156,7 @@ export const ARTISTS: Artist[] = [
     bio: 'Deeply resonant basslines and spiritual melodies for the soul.',
     image: '/images/artists/dj/profound.jpg',
     genres: ['Melodic Techno', 'Deep'],
-    featured: true,
+    featured: false,
     category: 'DJ',
     socials: { instagram: '#', soundcloud: '#' }
   },
@@ -205,6 +205,16 @@ export const RELEASES: Release[] = [
         title: 'Code Cannabis' ,
         audioSrc: 'audio/albums/acidBubble/codeCannabis.mp3'
       },
+      { 
+        id: "t2",
+        title: 'Time Twister' ,
+        audioSrc: 'audio/albums/acidBubble/timeTwister.mp3'
+      },
+      {
+        id: "t3",
+        title: 'Dream Dissolver' ,
+        audioSrc: ''
+      }
     ]
   },
   {
@@ -426,10 +436,37 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'e3',
-    title: 'Techno Shamanism',
+    title: 'Binary Botany',
+    date: '2024-09-07',
+    location: 'Cape Town',
+    venue: 'colorbox Studios',
+    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    link: '#'
+  },
+  {
+    id: 'e4',
+    title: 'Binary Botany',
     date: '2024-06-08',
-    location: 'Amsterdam, NL',
-    venue: 'Radion',
+    location: 'Cape Town',
+    venue: 'colorbox Studios',
+    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    link: '#'
+  },
+  {
+    id: 'e5',
+    title: 'Binary Botany',
+    date: '2024-03-30',
+    location: 'Cape Town',
+    venue: 'colorbox Studios',
+    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    link: '#'
+  },
+  {
+    id: 'e6',
+    title: 'Alchemical Stories',
+    date: '2024-01-27',
+    location: 'Cape Town',
+    venue: 'The Spice Yard',
     image: 'https://picsum.photos/seed/amsterdam/1200/600',
     link: '#'
   }

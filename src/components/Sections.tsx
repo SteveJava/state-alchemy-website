@@ -36,6 +36,8 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
                   src={artist.image} 
                   alt={artist.name} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
@@ -44,8 +46,28 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
                     <p className="text-xs text-brand-primary uppercase tracking-widest">{artist.genres[0]}</p>
                   </div>
                   <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {artist.socials.instagram && <Instagram className="w-4 h-4 cursor-pointer hover:text-brand-primary" />}
-                    {artist.socials.soundcloud && <Music className="w-4 h-4 cursor-pointer hover:text-brand-primary" />}
+                  {artist.socials.instagram && artist.socials.instagram !== "#" && (
+                      <a
+                        href={artist.socials.instagram}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${artist.name} on Instagram`}
+                        className="hover:text-brand-primary transition-colors"
+                      >
+                        <Instagram className="w-4 h-4" />
+                      </a>
+                    )}
+                    {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
+                      <a
+                        href={artist.socials.soundcloud}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${artist.name} on SoundCloud`}
+                        className="hover:text-brand-primary transition-colors"
+                      >
+                        <Music className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -81,8 +103,9 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
   let displayReleases = type ? RELEASES.filter(r => r.type === type) : RELEASES;
   displayReleases = displayReleases.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  displayReleases = displayReleases.slice(0, 3);
-  
+  if (limit) {
+    displayReleases = displayReleases.slice(0, limit);
+  }
 
   const getTitle = () => {
     if (type === 'Album') return "Full Length Journeys";
@@ -117,7 +140,9 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
                 <img 
                   src={release.cover} 
                   alt={release.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="p-6 flex-grow flex flex-col justify-between">

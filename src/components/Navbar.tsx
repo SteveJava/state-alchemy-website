@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Artists", href: "/artists" },
   { name: "Releases", href: "/releases" },
-  { name: "Events", href: "/#events" },
+  { name: "Events", href: "/events" },
   { name: "About", href: "/#about" },
 ];
 
@@ -42,6 +42,7 @@ export const Navbar = () => {
       </AnimatePresence>
 
       <nav
+        aria-label="Primary navigation"
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           scrolled ? "glass py-4" : "bg-transparent py-6"
         }`}
@@ -65,7 +66,7 @@ export const Navbar = () => {
               }}
             />
             <span className="font-display text-xl font-bold tracking-tighter uppercase">
-              State Alchemy
+              State Alchemy Music
             </span>
           </Link>
 
@@ -87,6 +88,9 @@ export const Navbar = () => {
           <button
             className="md:hidden text-brand-text"
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X /> : <Menu />}
           </button>
@@ -96,6 +100,7 @@ export const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
+              id="mobile-navigation"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}

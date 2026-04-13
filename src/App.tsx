@@ -13,7 +13,8 @@ import { Footer } from "./components/Footer";
 import { HomePage } from "./pages/HomePage";
 import Artists from "./pages/Artists";
 import ReleasesPage from "./pages/ReleasesPage";
-import AcidBubble from "./pages/AcidBubble";
+import ReleasePage from "./pages/ReleasePage";
+import EventsPage from "./pages/EventsPage";
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -60,7 +61,8 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/releases" element={<ReleasesPage />} />
-            <Route path="/releases/acid-bubble" element={<AcidBubble />} />
+            <Route path="/releases/:slug" element={<ReleasePage />} />
+            <Route path="/events" element={<EventsPage />} />
           </Routes>
         </main>
 

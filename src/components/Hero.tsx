@@ -39,9 +39,9 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-6xl md:text-8xl font-bold mb-6 tracking-tighter uppercase"
+          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight uppercase leading-[1.1]"
         >
-          State <span className="text-gradient">Alchemy</span>
+          State <span className="text-gradient">Alchemy</span> Music
         </motion.h1>
 
         <motion.p
