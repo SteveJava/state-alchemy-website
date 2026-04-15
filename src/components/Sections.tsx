@@ -1,27 +1,49 @@
 import { motion } from "framer-motion";
-import { Section, Card, Button } from "./ui/Base";
+import { Section } from "./ui/Base";
+import { MediaCard } from "./Mediacard";
 import { ARTISTS, RELEASES, EVENTS } from "../constants/data";
-import { Instagram, Music, ExternalLink, MapPin, Calendar as CalendarIcon, ArrowRight } from "lucide-react";
+import { Instagram, Music, MapPin, Calendar as CalendarIcon, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ArtistsSectionProps {
   featuredOnly?: boolean;
-  category?: 'Live' | 'DJ';
+  category?: "Live" | "DJ";
 }
 
+interface ReleasesSectionProps {
+  type?: "Album" | "EP" | "Single" | "Compilation";
+  limit?: number;
+}
+
+interface EventsSectionProps {
+  limit?: number;
+}
+
+const SectionLinkButton = ({ to }: { to: string }) => (
+  <div className="mt-12 flex justify-center">
+    <Link
+      to={to}
+      className="group inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-white/[0.03] px-6 py-3 text-sm font-medium text-brand-text backdrop-blur-md transition-all duration-300 hover:border-brand-primary/60 hover:bg-brand-primary/10 hover:text-brand-primary hover:shadow-[0_0_30px_rgba(255,120,40,0.12)]"
+    >
+      <span>See more</span>
+      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+    </Link>
+  </div>
+);
+
 export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectionProps) => {
-  let displayArtists = featuredOnly ? ARTISTS.filter(a => a.featured) : ARTISTS;
-  
+  let displayArtists = featuredOnly ? ARTISTS.filter((a) => a.featured) : ARTISTS;
+
   if (category) {
-    displayArtists = displayArtists.filter(a => a.category === category);
+    displayArtists = displayArtists.filter((a) => a.category === category);
   }
 
   return (
-    <Section 
-      id="artists" 
-      title={category ? `${category} Acts` : (featuredOnly ? "Featured Alchemists" : "The Alchemists")} 
+    <Section
+      id="artists"
+      title={category ? `${category} Acts` : featuredOnly ? "Featured Alchemists" : "The Alchemists"}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayArtists.map((artist, idx) => (
           <motion.div
             key={artist.id}
@@ -30,97 +52,64 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
             transition={{ delay: idx * 0.1 }}
             viewport={{ once: true }}
           >
-            <Card className="group">
-              <div className="aspect-square overflow-hidden relative">
-                <img 
-                  src={artist.image} 
-                  alt={artist.name} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-60" />
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                  <div>
-                    <h3 className="text-xl font-bold">{artist.name}</h3>
-                    <p className="text-xs text-brand-primary uppercase tracking-widest">{artist.genres[0]}</p>
-                  </div>
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <MediaCard
+              image={artist.image}
+              title={artist.name}
+              subtitle={artist.genres.join(", ")}
+              metaLeft={artist.category}
+              link={`/artists/${artist.slug}`}
+              footer={
+                <>
                   {artist.socials.instagram && artist.socials.instagram !== "#" && (
-                      <a
-                        href={artist.socials.instagram}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${artist.name} on Instagram`}
-                        className="hover:text-brand-primary transition-colors"
-                      >
-                        <Instagram className="w-4 h-4" />
-                      </a>
-                    )}
-                    {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
-                      <a
-                        href={artist.socials.soundcloud}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${artist.name} on SoundCloud`}
-                        className="hover:text-brand-primary transition-colors"
-                      >
-                        <Music className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </Card>
+                    <a
+                      href={artist.socials.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${artist.name} on Instagram`}
+                      className="hover:text-brand-primary transition-colors"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                  )}
+                  {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
+                    <a
+                      href={artist.socials.soundcloud}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${artist.name} on SoundCloud`}
+                      className="hover:text-brand-primary transition-colors"
+                    >
+                      <Music className="w-4 h-4" />
+                    </a>
+                  )}
+                </>
+              }
+            />
           </motion.div>
         ))}
       </div>
-      
-      {featuredOnly && (
-        <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
-          <Link to="/live-acts">
-            <Button variant="outline" className="flex items-center gap-2 mx-auto">
-              View Live Acts <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          <Link to="/dj-acts">
-            <Button variant="outline" className="flex items-center gap-2 mx-auto">
-              View DJ Acts <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
-      )}
+
+      {featuredOnly && <SectionLinkButton to="/artists" />}
     </Section>
   );
 };
 
-interface ReleasesSectionProps {
-  type?: 'Album' | 'EP' | 'Single' | 'Compilation';
-  limit?: number;
-}
-
 export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
-  let displayReleases = type ? RELEASES.filter(r => r.type === type) : RELEASES;
-  displayReleases = displayReleases.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  let displayReleases = type ? RELEASES.filter((r) => r.type === type) : RELEASES;
+  displayReleases = [...displayReleases].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   if (limit) {
     displayReleases = displayReleases.slice(0, limit);
   }
 
   const getTitle = () => {
-    if (type === 'Album') return "Full Length Journeys";
-    if (type === 'EP') return "Extended Plays";
-    if (type === 'Single') return "Sonic Fragments";
-    if (type === 'Compilation') return "Collective Artifacts";
+    if (type === "Album") return "Full Length Journeys";
+    if (type === "EP") return "Extended Plays";
+    if (type === "Single") return "Sonic Fragments";
+    if (type === "Compilation") return "Collective Artifacts";
     return "Latest Releases";
-  };
-
-  const getSubtitle = () => {
-    if (type === 'Album') return "Albums";
-    if (type === 'EP') return "EPs";
-    if (type === 'Single') return "Singles";
-    if (type === 'Compilation') return "Various Artists / Compilations";
-    return "Releases";
   };
 
   return (
@@ -134,67 +123,36 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
             transition={{ delay: idx * 0.1 }}
             viewport={{ once: true }}
           >
-          <Link to={`/releases/${release.slug}`}>
-            <Card className="group h-full flex flex-col">
-              <div className="aspect-square overflow-hidden relative flex-shrink-0">
-                <img 
-                  src={release.cover} 
-                  alt={release.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col justify-between">
-                <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="text-[10px] uppercase tracking-widest px-2 py-1 border border-brand-primary/30 rounded text-brand-primary">
-                      {release.type}
-                    </span>
-                    <span className="text-xs text-brand-text-muted">{release.date}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-1 group-hover:text-brand-primary transition-colors">{release.title}</h3>
-                  <p className="text-brand-text-muted text-sm">{release.artist}</p>
-                </div>
-              </div>
-            </Card>
-          </Link>
+            <MediaCard
+              image={release.cover}
+              title={release.title}
+              subtitle={release.artist}
+              metaLeft={release.type}
+              metaRight={release.date}
+              link={`/releases/${release.slug}`}
+            />
           </motion.div>
         ))}
       </div>
-      
-      {limit && (
-        <div className="mt-12 flex flex-wrap justify-center gap-4">
-          <Link to="/albums">
-            <Button variant="outline" className="flex items-center gap-2">
-              Albums <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          <Link to="/eps">
-            <Button variant="outline" className="flex items-center gap-2">
-              EPs <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          <Link to="/singles">
-            <Button variant="outline" className="flex items-center gap-2">
-              Singles <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          <Link to="/compilations">
-            <Button variant="outline" className="flex items-center gap-2">
-              Compilations <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
-      )}
+
+      {limit && <SectionLinkButton to="/releases" />}
     </Section>
   );
 };
 
-export const EventsSection = () => (
-  <Section id="events" title="Rituals">
-    <div className="space-y-4">
-      {EVENTS.map((event, idx) => (
+export const EventsSection = ({ limit }: EventsSectionProps) => {
+  let displayEvents = [...EVENTS].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  if (limit) {
+    displayEvents = displayEvents.slice(0, limit);
+  }
+
+  return (
+    <Section id="events" title="Rituals">
+      <div className="space-y-4">
+      {displayEvents.map((event, idx) => (
         <motion.div
           key={event.id}
           initial={{ opacity: 0, y: 20 }}
@@ -202,34 +160,48 @@ export const EventsSection = () => (
           transition={{ delay: idx * 0.1 }}
           viewport={{ once: true }}
         >
-          <div className="glass group p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center hover:border-brand-secondary/30 transition-all duration-500">
-            <div className="w-full md:w-32 h-20 rounded-lg overflow-hidden flex-shrink-0">
-              <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
-            </div>
-            <div className="flex-grow text-center md:text-left">
-              <h3 className="text-xl font-bold mb-1 group-hover:text-brand-secondary transition-colors">{event.title}</h3>
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-brand-text-muted">
-                <span className="flex items-center gap-1"><CalendarIcon className="w-4 h-4 text-brand-secondary" /> {event.date}</span>
-                <span className="flex items-center gap-1"><MapPin className="w-4 h-4 text-brand-secondary" /> {event.venue}, {event.location}</span>
+          <Link to={`/events/${event.slug}`}>
+            <div className="glass group p-6 rounded-2xl flex flex-col md:flex-row gap-6 items-center hover:border-brand-secondary/30 transition-all duration-500">
+              <div className="w-full md:w-32 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+              </div>
+
+              <div className="flex-grow text-center md:text-left">
+                <h3 className="text-xl font-bold mb-1 group-hover:text-brand-secondary transition-colors">
+                  {event.title}
+                </h3>
+                <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-brand-text-muted">
+                  <span className="flex items-center gap-1">
+                    <CalendarIcon className="w-4 h-4 text-brand-secondary" /> {event.date}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <MapPin className="w-4 h-4 text-brand-secondary" /> {event.venue}, {event.location}
+                  </span>
+                </div>
               </div>
             </div>
-            <Button variant="outline" className="border-brand-secondary text-brand-secondary hover:bg-brand-secondary/10">
-              Tickets
-            </Button>
-          </div>
+          </Link>
         </motion.div>
-      ))}
-    </div>
-  </Section>
-);
+))}
+      </div>
+
+      {limit && <SectionLinkButton to="/events" />}
+    </Section>
+  );
+};
 
 export const AboutSection = () => (
   <Section id="about" title="The Essence" subtitle="About Us" className="text-center max-w-3xl">
     <p className="text-xl text-brand-text-muted leading-relaxed mb-8">
-      State Alchemy is more than a label; it is a vessel for sonic exploration. Born from the shadows of the underground, we seek to bridge the gap between the physical and the metaphysical through the medium of electronic frequency.
+      State Alchemy is more than a label; it is a vessel for sonic exploration. Born from the shadows
+      of the underground, we seek to bridge the gap between the physical and the metaphysical through
+      the medium of electronic frequency.
     </p>
     <p className="text-brand-text-muted leading-relaxed">
-      Our mission is to curate a space where artists can experiment without boundaries, pushing the limits of hypnotic techno and psychedelic soundscapes. We believe in the ritual of the dancefloor—a collective state of alchemy where individual egos dissolve into a singular, vibrating whole.
+      Our mission is to curate a space where artists can experiment without boundaries, pushing the
+      limits of hypnotic techno and psychedelic soundscapes. We believe in the ritual of the
+      dancefloor—a collective state of alchemy where individual egos dissolve into a singular,
+      vibrating whole.
     </p>
   </Section>
 );

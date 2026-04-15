@@ -1,61 +1,69 @@
 import { useParams } from "react-router-dom";
 import { ARTISTS } from "../constants/data";
+import { Instagram, Music } from "lucide-react";
 
 export default function ArtistPage() {
-  const { id } = useParams();
-  const artist = ARTISTS.find((a) => a.id === id);
+  const { slug } = useParams();
+  const artist = ARTISTS.find((a) => a.slug === slug);
 
-  if (!artist) return <div className="p-10">Not found</div>;
+  if (!artist) {
+    return <div className="p-10">Artist not found</div>;
+  }
 
   return (
-    <div className="min-h-screen p-10 max-w-4xl mx-auto">
+    <div className="min-h-screen pt-28 pb-20 px-6 md:px-10 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <img
+            src={artist.image}
+            alt={artist.name}
+            className="w-full max-w-xl rounded-xl mb-6"
+          />
+        </div>
 
-      {/* Header Image */}
-      <img
-        src={artist.image}
-        className="w-full max-w-md rounded-xl mb-6"
-        alt={artist.name}
-      />
+        <div>
+          <p className="text-xs uppercase tracking-widest text-brand-primary mb-2">
+            {artist.category}
+          </p>
 
-      {/* Name */}
-      <h1 className="text-3xl font-bold">
-        {artist.name}
-      </h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+            {artist.name}
+          </h1>
 
-      {/* Category */}
-      <p className="text-brand-text-muted mt-1">
-        {artist.category}
-      </p>
+          <p className="text-brand-text-muted text-sm mb-4">
+            {artist.genres.join(", ")}
+          </p>
 
-      {/* Bio */}
-      <p className="mt-6 text-white/70 leading-relaxed">
-        {artist.bio}
-      </p>
+          <p className="text-brand-text-muted leading-relaxed mb-6">
+            {artist.bio}
+          </p>
 
-      {/* Genres */}
-      <div className="mt-6 text-sm text-white/60">
-        Genres: {artist.genres.join(", ")}
-      </div>
+          <div className="flex gap-4">
+            {artist.socials.instagram && artist.socials.instagram !== "#" && (
+              <a
+                href={artist.socials.instagram}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-brand-primary transition-colors"
+                aria-label={`${artist.name} on Instagram`}
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+            )}
 
-      {/* Socials (optional but future-proof) */}
-      <div className="mt-8 flex gap-4 text-sm text-brand-primary">
-        {artist.socials?.instagram && (
-          <a href={artist.socials.instagram} target="_blank">
-            Instagram
-          </a>
-        )}
-
-        {artist.socials?.soundcloud && (
-          <a href={artist.socials.soundcloud} target="_blank">
-            SoundCloud
-          </a>
-        )}
-
-        {artist.socials?.spotify && (
-          <a href={artist.socials.spotify} target="_blank">
-            Spotify
-          </a>
-        )}
+            {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
+              <a
+                href={artist.socials.soundcloud}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-brand-primary transition-colors"
+                aria-label={`${artist.name} on SoundCloud`}
+              >
+                <Music className="w-5 h-5" />
+              </a>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

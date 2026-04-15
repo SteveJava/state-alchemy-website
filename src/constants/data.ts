@@ -1,6 +1,7 @@
 
 export interface Artist {
   id: string;
+  slug: string;
   name: string;
   bio: string;
   image: string;
@@ -39,21 +40,24 @@ export interface Release {
 
 export interface Event {
   id: string;
+  slug: string;
   title: string;
   date: string;
   location: string;
   venue: string;
   image: string;
   link: string;
+  description?: string;
 }
 
 export const ARTISTS: Artist[] = [
   // Live Acts
   {
     id: 'live-1',
+    slug: 'gray-matter',
     name: 'Gray Matter',
     bio: 'Sound Manipulator - Light Calculator - Time Travel Participator.',
-    image: 'images/artists/liveActs/grayMatter.jpg',
+    image: '/images/artists/liveActs/grayMatter.jpg',
     genres: ['Experimental','Psychedelic'],
     featured: true,
     category: 'Live',
@@ -61,6 +65,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'live-2',
+    slug: 'blether',
     name: 'Blether',
     bio: 'Raw, unfiltered energy and distorted frequencies for the peak time.',
     image: '/images/artists/liveActs/blether.jpg',
@@ -71,16 +76,18 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'live-3',
+    slug: 'skorgen',
     name: 'Skörgen',
     bio: 'Hypnotic soundscapes and deep rhythmic explorations.',
     image: '/images/artists/liveActs/skorgen.png',
     genres: ['Forest'],
-    featured: false,
+    featured: true,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
   },
   {
     id: 'live-4',
+    slug: 'voidwalker',
     name: 'Voidwalker',
     bio: 'Experimental soundscapes and industrial-tinged atmospheric techno.',
     image: '/images/artists/liveActs/voidwalker.jpg',
@@ -91,6 +98,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'live-5',
+    slug: 'phylth',
     name: 'Phylth',
     bio: 'Gritty, dark, and uncompromising sound design from the urban abyss.',
     image: '/images/artists/liveActs/phylth.jpg',
@@ -101,6 +109,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'live-6',
+    slug: 'jahshua',
     name: 'Jahshua',
     bio: 'Spiritual frequencies and deep bass explorations.',
     image: '/images/artists/liveActs/jahshua.jpg',
@@ -112,9 +121,10 @@ export const ARTISTS: Artist[] = [
   // DJ Acts
   {
     id: 'dj-1',
+    slug: 'drifter',
     name: 'Drifter',
     bio: 'Atmospheric journeys through space and time, blending ambient with driving beats.',
-    image: 'https://picsum.photos/seed/drifter/800/800',
+    image: '/images/artists/dj/drifter.jpg',
     genres: ['Atmospheric Techno', 'Ambient'],
     featured: false,
     category: 'DJ',
@@ -122,6 +132,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-2',
+    slug: 'killer-b',
     name: 'Killer B',
     bio: 'High-energy selections and relentless groove.',
     image: '/images/artists/dj/killerB.jpg',
@@ -132,6 +143,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-3',
+    slug: 'akuum',
     name: 'Akuum',
     bio: 'Deep hypnotic techno with psychedelic textures and tribal rhythms.',
     image: '/images/artists/dj/akuum.jpg',
@@ -142,6 +154,7 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-4',
+    slug: 'a-geoffrey',
     name: 'A Geoffrey',
     bio: 'Intricate soundscapes and rhythmic complexity from the depths of the underground.',
     image: '/images/artists/dj/aGeoffrey.jpg',
@@ -152,16 +165,18 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-5',
+    slug: 'profound',
     name: 'Profound',
     bio: 'Deeply resonant basslines and spiritual melodies for the soul.',
     image: '/images/artists/dj/profound.jpg',
     genres: ['Melodic Techno', 'Deep'],
-    featured: false,
+    featured: true,
     category: 'DJ',
     socials: { instagram: '#', soundcloud: '#' }
   },
   {
     id: 'dj-6',
+    slug: 'intropin',
     name: 'Intropin',
     bio: 'Fast-paced rhythmic structures and cerebral textures.',
     image: '/images/artists/dj/intropin.png',
@@ -172,9 +187,10 @@ export const ARTISTS: Artist[] = [
   },
   {
     id: 'dj-7',
+    slug: 'hutch',
     name: 'Hutch',
     bio: 'Classic underground sounds with a modern twist.',
-    image: 'https://picsum.photos/seed/hutch/800/800',
+    image: '/images/artists/dj/hutch.jpg',
     genres: ['Techno', 'Classic'],
     featured: false,
     category: 'DJ',
@@ -418,15 +434,17 @@ export const RELEASES: Release[] = [
 export const EVENTS: Event[] = [
   {
     id: 'e1',
+    slug: 'state-alchemy-festival',
     title: 'State Alchemy Festival',
     date: '2025-10-25',
     location: 'Western Cape',
     venue: 'Rawsonville',
-    image: 'images/events/stateAlchemyFestival/cover.JPG',
+    image: '/images/events/stateAlchemyFestival/cover.JPG',
     link: '#'
   },
   {
     id: 'e2',
+    slug: 'state-alchemists-record-label-evening',
     title: 'The State Alchemists Record Label Evening',
     date: '2025-08-2',
     location: 'Cape Town',
@@ -436,7 +454,8 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'e3',
-    title: 'Binary Botany',
+    slug: 'binary-botany-karev',
+    title: 'Binary Botany Feat. Karev & Alchemy Circle',
     date: '2024-09-07',
     location: 'Cape Town',
     venue: 'colorbox Studios',
@@ -445,6 +464,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'e4',
+    slug: 'binary-botany',
     title: 'Binary Botany',
     date: '2024-06-08',
     location: 'Cape Town',
@@ -454,7 +474,8 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'e5',
-    title: 'Binary Botany',
+    slug: 'binary-botany-creepy-deep',
+    title: 'Binary Botany Feat. Creepy Deep',
     date: '2024-03-30',
     location: 'Cape Town',
     venue: 'colorbox Studios',
@@ -463,6 +484,7 @@ export const EVENTS: Event[] = [
   },
   {
     id: 'e6',
+    slug: 'alchemical-stories',
     title: 'Alchemical Stories',
     date: '2024-01-27',
     location: 'Cape Town',

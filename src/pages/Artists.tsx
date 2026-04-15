@@ -54,7 +54,7 @@ export default function Artists() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.05 }}
           >
-            <Link to={`/artists/${artist.id}`}>
+            <Link to={`/artists/${artist.slug}`}>
 
               <div className="group cursor-pointer">
 

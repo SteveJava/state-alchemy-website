@@ -1,5 +1,6 @@
 import { EVENTS } from "../constants/data";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function EventsPage() {
   const sortedEvents = [...EVENTS].sort(
@@ -25,40 +26,31 @@ export default function EventsPage() {
               transition={{ delay: idx * 0.05 }}
               className="group"
             >
-              <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                  />
+              <Link to={`/events/${event.slug}`}>
+                <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                    />
+                  </div>
+
+                  <div className="p-5">
+                    <h2 className="text-xl font-semibold group-hover:text-brand-primary transition">
+                      {event.title}
+                    </h2>
+
+                    <p className="text-sm text-brand-text-muted mt-2">
+                      {event.date}
+                    </p>
+
+                    <p className="text-sm text-brand-text-muted">
+                      {event.venue}, {event.location}
+                    </p>
+                  </div>
                 </div>
-
-                <div className="p-5">
-                  <h2 className="text-xl font-semibold group-hover:text-brand-primary transition">
-                    {event.title}
-                  </h2>
-
-                  <p className="text-sm text-brand-text-muted mt-2">
-                    {event.date}
-                  </p>
-
-                  <p className="text-sm text-brand-text-muted">
-                    {event.venue}, {event.location}
-                  </p>
-
-                  {event.link && event.link !== "#" && (
-                    <a
-                      href={event.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-block mt-4 text-sm text-brand-primary hover:underline"
-                    >
-                      View Event
-                    </a>
-                  )}
-                </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>

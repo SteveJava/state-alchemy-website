@@ -32,28 +32,23 @@ export const Footer = () => {
           <h4 className="font-display uppercase tracking-widest text-sm mb-6">Navigation</h4>
           <ul className="space-y-4 text-brand-text-muted text-sm">
             <li><Link to="/" className="hover:text-brand-primary transition-colors">Home</Link></li>
-            <li><Link to="/live-acts" className="hover:text-brand-primary transition-colors">Live Acts</Link></li>
-            <li><Link to="/dj-acts" className="hover:text-brand-primary transition-colors">DJ Acts</Link></li>
-            <li><Link to="/albums" className="hover:text-brand-primary transition-colors">Albums</Link></li>
-            <li><Link to="/eps" className="hover:text-brand-primary transition-colors">EPs</Link></li>
-            <li><Link to="/singles" className="hover:text-brand-primary transition-colors">Singles</Link></li>
-            <li><Link to="/compilations" className="hover:text-brand-primary transition-colors">Compilations</Link></li>
-            <li><Link to="/#events" className="hover:text-brand-primary transition-colors">Events</Link></li>
+            <li><Link to="/artists" className="hover:text-brand-primary transition-colors">Artists</Link></li>
+            <li><Link to="/releases" className="hover:text-brand-primary transition-colors">Releases</Link></li>
+            <li><Link to="/events" className="hover:text-brand-primary transition-colors">Events</Link></li>
+            <li><Link to="/about" className="hover:text-brand-primary transition-colors">About</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-display uppercase tracking-widest text-sm mb-6">Contact</h4>
           <ul className="space-y-4 text-brand-text-muted text-sm">
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4" /> demo@statealchemy.com</li>
-            <li>Press: media@statealchemy.com</li>
-            <li>Booking: booking@statealchemy.com</li>
+            <li className="flex items-center gap-2"><Mail className="w-4 h-4" />statealchemyofficial@gmail.com</li>
           </ul>
         </div>
       </div>
       
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] uppercase tracking-[0.2em] text-brand-text-muted">
-        <p>© 2024 State Alchemy Records. All Rights Reserved.</p>
+        <p>© 2026 State Alchemy Records. All Rights Reserved.</p>
         <div className="flex gap-8">
           <a href="#" className="hover:text-brand-text transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-brand-text transition-colors">Terms of Service</a>
