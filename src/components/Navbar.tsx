@@ -48,7 +48,6 @@ export const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          
           {/* Logo */}
           <Link
             to="/"
@@ -65,8 +64,12 @@ export const Navbar = () => {
                   "https://picsum.photos/seed/alchemy-logo/100/100";
               }}
             />
-            <span className="font-display text-xl font-bold tracking-tighter uppercase">
-              State Alchemy Music
+            <span className="whitespace-nowrap font-display text-xl font-bold tracking-tighter uppercase">
+              State{" "}
+              <span className="text-gradient group-hover:brightness-125 transition">
+                Alchemy
+              </span>{" "}
+              Music
             </span>
           </Link>
 
@@ -76,7 +79,11 @@ export const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-sm font-display uppercase tracking-widest text-brand-text-muted hover:text-brand-primary transition-colors"
+                className={`text-sm font-display uppercase tracking-widest transition-colors ${
+                  location.pathname === link.href
+                    ? "text-brand-primary"
+                    : "text-brand-text-muted hover:text-brand-primary"
+                }`}
                 onClick={handleLinkClick}
               >
                 {link.name}
@@ -111,7 +118,11 @@ export const Navbar = () => {
                   key={link.name}
                   to={link.href}
                   onClick={handleLinkClick}
-                  className="text-lg font-display uppercase tracking-widest text-brand-text-muted hover:text-brand-primary transition-colors"
+                  className={`text-lg font-display uppercase tracking-widest transition-colors ${
+                    location.pathname === link.href
+                      ? "text-brand-primary"
+                      : "text-brand-text-muted hover:text-brand-primary"
+                  }`}
                 >
                   {link.name}
                 </Link>

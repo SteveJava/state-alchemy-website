@@ -219,16 +219,41 @@ export const RELEASES: Release[] = [
       { 
         id: "t1",
         title: 'Code Cannabis' ,
-        audioSrc: 'audio/albums/acidBubble/codeCannabis.mp3'
+        audioSrc: '/audio/albums/acidBubble/codeCannabis.mp3'
       },
       { 
         id: "t2",
         title: 'Time Twister' ,
-        audioSrc: 'audio/albums/acidBubble/timeTwister.mp3'
+        audioSrc: '/audio/albums/acidBubble/timeTwister.mp3'
       },
       {
         id: "t3",
         title: 'Dream Dissolver' ,
+        audioSrc: ''
+      },
+      {
+        id: "t4",
+        title: 'Chakra Attack' ,
+        audioSrc: ''
+      },
+      {
+        id: "t5",
+        title: 'Insecto Gadget (with ZDLCK)' ,
+        audioSrc: ''
+      },
+      {
+        id: "t6",
+        title: 'Acid Bubble' ,
+        audioSrc: ''
+      },
+      {
+        id: "t7",
+        title: 'Modified Magic' ,
+        audioSrc: ''
+      },
+      {
+        id: "t8",
+        title: 'Singular State' ,
         audioSrc: ''
       }
     ]
@@ -241,7 +266,65 @@ export const RELEASES: Release[] = [
     cover: '/images/music/albums/potionOfEmotion.avif',
     type: 'Album',
     link: '#',
-    slug: 'potion-of-emotion'
+    slug: 'potion-of-emotion',
+    description: "Welcome to Potion of Emotion. We, here at Gray Matter - have been watching you - analyzing every action and magick. Use your passionate emotions as a focusing tool for our inter-dimensional program. You display a strong connection to these dimensional portals. The portal config is a perfect match. Shall we commence with a preliminary astral dive?",
+    tracks: [
+      { 
+        id: "t1",
+        title: 'III' ,
+        audioSrc: ''
+      },
+      { 
+        id: "t2",
+        title: 'Hive Minded' ,
+        audioSrc: ''
+      },
+      {
+        id: "t3",
+        title: 'Scholar Patrol' ,
+        audioSrc: ''
+      },
+      {
+        id: "t4",
+        title: 'Gates of Encounters' ,
+        audioSrc: ''
+      },
+      {
+        id: "t5",
+        title: 'You-Zoo-Maki' ,
+        audioSrc: ''
+      },
+      {
+        id: "t6",
+        title: 'Agothas Interlude' ,
+        audioSrc: ''
+      },
+      {
+        id: "t7",
+        title: 'Dark Waters' ,
+        audioSrc: ''
+      },
+      {
+        id: "t8",
+        title: 'Ndlovu' ,
+        audioSrc: ''
+      },
+      {
+        id: "t9",
+        title: 'Deja Vu',
+        audioSrc: ''
+      },
+      {
+        id: "t10",
+        title: 'Character Development',
+        audioSrc: ''
+      },
+      {
+        id: "t11",
+        title: 'The Tribe has Spoken (Outro)',
+        audioSrc: ''
+      }
+    ]
   },
 
   // EPs
@@ -428,6 +511,16 @@ export const RELEASES: Release[] = [
     type: 'Compilation',
     link: '#',
     slug: 'forgotten-fynbos'
+  },
+  {
+    id: 'comp-7',
+    title: 'It Came To Pass',
+    artist: 'Various Artists',
+    date: '2026-04-24',
+    cover: '/images/music/compilations/itCameToPass.avif',
+    type: 'Compilation',
+    link: '#',
+    slug: 'it-came-to-pass'
   }
 ];  
 

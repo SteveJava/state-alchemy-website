@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ARTISTS } from "../constants/data";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { MediaCard } from "../components/Mediacard";
+import { Instagram, Music } from "lucide-react";
 
 const filters = ["All", "Live", "DJ"] as const;
 type Filter = typeof filters[number];
@@ -19,16 +21,13 @@ export default function Artists() {
       : sortedArtists.filter((a) => a.category === filter);
 
   return (
-    <div className="min-h-screen pt-28 px-10">
-
-      {/* Header */}
+    <div className="min-h-screen pt-28 px-6 md:px-10 max-w-7xl mx-auto">
       <h1 className="text-4xl font-bold mb-6">Artists</h1>
 
       <p className="text-brand-text-muted mb-6">
         The State Alchemy roster.
       </p>
 
-      {/* Filter Buttons (MATCH RELEASES STYLE) */}
       <div className="flex flex-wrap gap-3 mb-10">
         {filters.map((f) => (
           <button
@@ -45,8 +44,7 @@ export default function Artists() {
         ))}
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredArtists.map((artist, idx) => (
           <motion.div
             key={artist.id}
@@ -54,41 +52,40 @@ export default function Artists() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.05 }}
           >
-            <Link to={`/artists/${artist.slug}`}>
-
-              <div className="group cursor-pointer">
-
-                {/* Image */}
-                <div className="aspect-square overflow-hidden rounded-xl">
-                  <img
-                    src={artist.image}
-                    alt={artist.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                  />
-                </div>
-
-                {/* Info */}
-                <div className="mt-3">
-                  <h3 className="text-lg font-bold group-hover:text-brand-primary transition">
-                    {artist.name}
-                  </h3>
-
-                  <p className="text-sm text-brand-text-muted">
-                    {artist.category}
-                  </p>
-
-                  <p className="text-xs text-brand-text-muted mt-1">
-                    {artist.genres.join(", ")}
-                  </p>
-                </div>
-
-              </div>
-
-            </Link>
+            <MediaCard
+              image={artist.image}
+              title={artist.name}
+              subtitle={artist.genres.join(", ")}
+              metaLeft={artist.category}
+              link={`/artists/${artist.slug}`}
+              footer={
+                <>
+                  {artist.socials.instagram && artist.socials.instagram !== "#" && (
+                    <a
+                      href={artist.socials.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-brand-primary transition-colors"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                  )}
+                  {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
+                    <a
+                      href={artist.socials.soundcloud}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-brand-primary transition-colors"
+                    >
+                      <Music className="w-4 h-4" />
+                    </a>
+                  )}
+                </>
+              }
+            />
           </motion.div>
         ))}
       </div>
-
     </div>
   );
 }

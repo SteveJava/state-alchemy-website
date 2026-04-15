@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { RELEASES } from "../constants/data";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { MediaCard } from "../components/Mediacard";
 
 const filters = ["All", "Album", "EP", "Single", "Compilation"] as const;
-
 type Filter = typeof filters[number];
 
 export default function ReleasesPage() {
@@ -12,11 +11,15 @@ export default function ReleasesPage() {
 
   const filteredReleases =
     filter === "All"
-      ? RELEASES
+      ? [...RELEASES]
       : RELEASES.filter((r) => r.type === filter);
 
+  const sortedReleases = filteredReleases.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
   return (
-    <div className="min-h-screen pt-28 px-10">
+    <div className="min-h-screen pt-28 px-6 md:px-10 max-w-7xl mx-auto">
       <h1 className="text-4xl font-bold mb-6">Releases</h1>
 
       <div className="flex flex-wrap gap-3 mb-10">
@@ -36,36 +39,21 @@ export default function ReleasesPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredReleases.map((release, idx) => (
+        {sortedReleases.map((release, idx) => (
           <motion.div
             key={release.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.05 }}
           >
-            <Link to={`/releases/${release.slug}`}>
-              <div className="group cursor-pointer">
-                <div className="aspect-square overflow-hidden rounded-xl">
-                  <img
-                    src={release.cover}
-                    alt={`${release.title} cover`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                  />
-                </div>
-
-                <div className="mt-3">
-                  <h3 className="text-lg font-bold group-hover:text-brand-primary transition">
-                    {release.title}
-                  </h3>
-                  <p className="text-sm text-brand-text-muted">
-                    {release.artist}
-                  </p>
-                  <p className="text-xs text-brand-text-muted mt-1">
-                    {release.type} • {release.date}
-                  </p>
-                </div>
-              </div>
-            </Link>
+            <MediaCard
+              image={release.cover}
+              title={release.title}
+              subtitle={release.artist}
+              metaLeft={release.type}
+              metaRight={release.date}
+              link={`/releases/${release.slug}`}
+            />
           </motion.div>
         ))}
       </div>
