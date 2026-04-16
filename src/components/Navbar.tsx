@@ -6,9 +6,8 @@ import { Link, useLocation } from "react-router-dom";
 const NAV_LINKS = [
   { name: "Home", href: "/" },
   { name: "Artists", href: "/artists" },
-  { name: "Releases", href: "/releases" },
+  { name: "Music", href: "/releases" },
   { name: "Events", href: "/events" },
-  { name: "About", href: "/#about" },
 ];
 
 export const Navbar = () => {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RELEASES } from "../constants/data";
 import { motion } from "framer-motion";
 import { MediaCard } from "../components/Mediacard";
+import { PageContainer } from "../components/layout/PageContainer";
 
 const filters = ["All", "Album", "EP", "Single", "Compilation"] as const;
 type Filter = typeof filters[number];
@@ -19,8 +20,11 @@ export default function ReleasesPage() {
   );
 
   return (
-    <div className="min-h-screen pt-28 px-6 md:px-10 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6">Releases</h1>
+    <PageContainer>
+      <h1 className="text-4xl md:text-5xl font-bold">Releases</h1>
+      <p className="text-brand-text-muted mt-4 mb-10">
+        Explore the latest sonic artifacts from State Alchemy.
+      </p>
 
       <div className="flex flex-wrap gap-3 mb-10">
         {filters.map((f) => (
@@ -57,6 +61,6 @@ export default function ReleasesPage() {
           </motion.div>
         ))}
       </div>
-    </div>
+    </PageContainer>
   );
 }

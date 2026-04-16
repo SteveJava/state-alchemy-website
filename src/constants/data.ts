@@ -102,7 +102,7 @@ export const ARTISTS: Artist[] = [
     name: 'Phylth',
     bio: 'Gritty, dark, and uncompromising sound design from the urban abyss.',
     image: '/images/artists/liveActs/phylth.jpg',
-    genres: ['Twilight Fullon'],
+    genres: ['Twilight Nightpsy'],
     featured: true,
     category: 'Live',
     socials: { soundcloud: '#', spotify: '#' }
@@ -113,7 +113,7 @@ export const ARTISTS: Artist[] = [
     name: 'Jahshua',
     bio: 'Spiritual frequencies and deep bass explorations.',
     image: '/images/artists/liveActs/jahshua.jpg',
-    genres: ['Dub Techno', 'Spiritual'],
+    genres: ['Darkpsy'],
     featured: false,
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
@@ -209,8 +209,7 @@ export const RELEASES: Release[] = [
     type: 'Album',
     link: '#',
     slug: 'acid-bubble',
-    description:
-      "Key To Insaniity drops debut full length album 'Acid Bubble' !! This is an 8-track trip built to shatter the ceiling between sub-genres. It's concentrated, high-BPM fuel for the floor—a psychedelic pressure cooker where every sonic layer is designed for maximum punch. This meticulously crafted piece of alien audio is a true reflection of an insight into the mind of one of South Africa's hottest producers! Take the flow and groove of conventional psy, and fuse it with the pounding high speed power of hitech beats and you complete Insaniity!! Featuring a collaboration track with another one of our label artist's ZDLCK, fusing the organic with the mechanical to form something of a true unique nature. Please lose your mind with us and dive right into this masterpiece! Strap in for the ride.",
+    description: "Key To Insaniity drops debut full length album 'Acid Bubble' !! This is an 8-track trip built to shatter the ceiling between sub-genres. It's concentrated, high-BPM fuel for the floor—a psychedelic pressure cooker where every sonic layer is designed for maximum punch. This meticulously crafted piece of alien audio is a true reflection of an insight into the mind of one of South Africa's hottest producers! Take the flow and groove of conventional psy, and fuse it with the pounding high speed power of hitech beats and you complete Insaniity!! Featuring a collaboration track with another one of our label artist's ZDLCK, fusing the organic with the mechanical to form something of a true unique nature. Please lose your mind with us and dive right into this masterpiece! Strap in for the ride.",
     bandcamp: {
       type: 'album',
       id: '3220687225'
@@ -465,7 +464,7 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-1',
     title: 'Best of 2 Years',
-    artist: 'Various Artists',
+    artist: 'State Alchemy Music',
     date: '2025-05-02',
     cover: '/images/music/compilations/bestOf2Years.avif',
     type: 'Compilation',
@@ -475,7 +474,7 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-3',
     title: 'Stroke the Furry Bassline',
-    artist: 'Various Artists',
+    artist: 'A Geoffrey',
     date: '2025-01-24',
     cover: '/images/music/compilations/strokeTheFurryBassline.avif',
     type: 'Compilation',
@@ -485,7 +484,7 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-4',
     title: 'Local is Lekker',
-    artist: 'Various Artists',
+    artist: 'State Alchemy Music',
     date: '2024-05-16',
     cover: '/images/music/compilations/localIsLekker.avif',
     type: 'Compilation',
@@ -495,7 +494,7 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-5',
     title: 'Equilibrium',
-    artist: 'Various Artists',
+    artist: 'Killer B',
     date: '2023-08-18',
     cover: '/images/music/compilations/equilibrium.avif',
     type: 'Compilation',
@@ -505,7 +504,7 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-6',
     title: 'Forgotten Fynbos',
-    artist: 'Various Artists',
+    artist: 'ZDLCK',
     date: '2025-04-04',
     cover: '/images/music/compilations/forgottenFynbos.avif',
     type: 'Compilation',
@@ -515,12 +514,70 @@ export const RELEASES: Release[] = [
   {
     id: 'comp-7',
     title: 'It Came To Pass',
-    artist: 'Various Artists',
+    artist: 'Profound',
     date: '2026-04-24',
     cover: '/images/music/compilations/itCameToPass.avif',
     type: 'Compilation',
     link: '#',
-    slug: 'it-came-to-pass'
+    slug: 'it-came-to-pass',
+    description: "It Came to Pass brings together nine artists under a single concept. The intersection of the spiritual and the unknown. Taking cues from biblical iconography and the idea of \"higher forms\", this VA explores themes of presence, judgement, and transformation. There's a clear sense of movement throughout, shifting from tension to release, from chaos to clarity. Balance sits at the core of the release. Lighter, more melodic moments contrast against darker, more driving cuts, creating a steady push and pull from start to finish. Each artist approaches the concept from a different angle, yet the tone remains consistent. Nothing feels out of place. This is a VA that unfolds over time. Subtle details, layered textures, and shifts in energy reveal themselves the deeper you go. It rewards attention.",
+    tracks: [
+      { 
+        id: "t1",
+        title: 'Grumpy Palace' ,
+        audioSrc: ''
+      },
+      { 
+        id: "t2",
+        title: 'Decalcification' ,
+        audioSrc: ''
+      },
+      {
+        id: "t3",
+        title: 'Don\'t Get Abducted' ,
+        audioSrc: ''
+      },
+      {
+        id: "t4",
+        title: 'Synaptic Overload' ,
+        audioSrc: ''
+      },
+      {
+        id: "t5",
+        title: 'Sonic Speedster' ,
+        audioSrc: ''
+      },
+      {
+        id: "t6",
+        title: 'The Allseeing Eye' ,
+        audioSrc: ''
+      },
+      {
+        id: "t7",
+        title: 'DX21' ,
+        audioSrc: ''
+      },
+      {
+        id: "t8",
+        title: 'Sacred Decay' ,
+        audioSrc: ''
+      },
+      {
+        id: "t9",
+        title: 'It Came To Pass' ,
+        audioSrc: ''
+      }
+    ]
+  },
+  {
+    id: 'comp-8',
+    title: 'The Law of Equivalent Exchange',
+    artist: 'Profound',
+    date: '2023-3-6',
+    cover: '/images/music/compilations/theLawOfEquivalentExchange.avif',
+    type: 'Compilation',
+    link: '#',
+    slug: 'the-law-of-equivalent-exchange'
   }
 ];  
 
@@ -542,7 +599,7 @@ export const EVENTS: Event[] = [
     date: '2025-08-2',
     location: 'Cape Town',
     venue: 'Colorbox Studios',
-    image: 'https://picsum.photos/seed/london/1200/600',
+    image: '/images/events/stateAlchemistsRecordLabelEvening/stateAlchemistsRecordLabelEvening.jpg',
     link: '#'
   },
   {
@@ -552,17 +609,17 @@ export const EVENTS: Event[] = [
     date: '2024-09-07',
     location: 'Cape Town',
     venue: 'colorbox Studios',
-    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    image: '/images/events/binaryBotanyKarev/binaryBotanyKarev.jpg',
     link: '#'
   },
   {
     id: 'e4',
-    slug: 'binary-botany',
-    title: 'Binary Botany',
+    slug: 'binary-botany-rinkadink-akari-system',
+    title: 'Binary Botany Feat. Rinkadink & Akari System',
     date: '2024-06-08',
     location: 'Cape Town',
     venue: 'colorbox Studios',
-    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    image: '/images/events/binaryBotanyRinkadink/binaryBotanyRinkadink.jpg',
     link: '#'
   },
   {
@@ -572,7 +629,7 @@ export const EVENTS: Event[] = [
     date: '2024-03-30',
     location: 'Cape Town',
     venue: 'colorbox Studios',
-    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    image: '/images/events/binaryBotanyCreepyDeep/binaryBotanyCreepyDeep.jpg',
     link: '#'
   },
   {
@@ -582,7 +639,7 @@ export const EVENTS: Event[] = [
     date: '2024-01-27',
     location: 'Cape Town',
     venue: 'The Spice Yard',
-    image: 'https://picsum.photos/seed/amsterdam/1200/600',
+    image: '/images/events/alchemicalStories/alchemicalStories.jpg',
     link: '#'
   }
 ];

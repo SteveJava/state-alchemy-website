@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { ARTISTS } from "../constants/data";
 import { Instagram, Music } from "lucide-react";
+import { PageContainer } from "../components/layout/PageContainer";
 
 export default function ArtistPage() {
   const { slug } = useParams();
@@ -11,7 +12,7 @@ export default function ArtistPage() {
   }
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-6 md:px-10 max-w-6xl mx-auto">
+    <PageContainer>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <div>
           <img
@@ -26,7 +27,7 @@ export default function ArtistPage() {
             {artist.category}
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
             {artist.name}
           </h1>
 
@@ -65,6 +66,6 @@ export default function ArtistPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 }

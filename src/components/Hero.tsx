@@ -51,8 +51,13 @@ export const Hero = () => {
               src="/images/SAM.png"
               alt="State Alchemy Logo"
               className="w-full h-full object-contain relative z-10 cursor-pointer"
-              whileHover={{ rotate: 90, scale: 1.05 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              animate={{ rotate: 360 }}
+              transition={{
+                repeat: Infinity,
+                duration: 20,
+                ease: "linear",
+              }}
+              whileHover={{ scale: 1.05 }}
               onError={(e) => {
                 e.currentTarget.src =
                   "https://picsum.photos/seed/alchemy-logo/200/200";

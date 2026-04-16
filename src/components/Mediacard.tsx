@@ -10,6 +10,7 @@ interface MediaCardProps {
   metaRight?: string;
   link?: string;
   footer?: ReactNode;
+  imageAspect?: string;
 }
 
 export const MediaCard = ({
@@ -20,10 +21,11 @@ export const MediaCard = ({
   metaRight,
   link,
   footer,
+  imageAspect = "aspect-square",
 }: MediaCardProps) => {
   const content = (
-    <Card className="group h-full flex flex-col">
-      <div className="aspect-square overflow-hidden relative flex-shrink-0">
+    <Card className="group h-full flex flex-col overflow-hidden">
+      <div className={`${imageAspect} overflow-hidden relative flex-shrink-0`}>
         <img
           src={image}
           alt={title}

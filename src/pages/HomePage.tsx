@@ -5,8 +5,8 @@ export const HomePage = () => {
   return (
     <>
       <Hero />
-      <ArtistsSection featuredOnly={true} />
       <ReleasesSection limit={6} />
+      <ArtistsSection featuredOnly={true} />
       <EventsSection limit={3}/>
       <AboutSection />
     </>

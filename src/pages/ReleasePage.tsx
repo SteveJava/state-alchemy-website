@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { RELEASES } from "../constants/data";
+import { PageContainer } from "../components/layout/PageContainer";
 
 export default function ReleasePage() {
   const { slug } = useParams();
@@ -137,7 +138,7 @@ export default function ReleasePage() {
   };
 
   return (
-    <div className="min-h-screen pt-28 pb-20 px-6 md:px-10 max-w-6xl mx-auto">
+    <PageContainer>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
           <img
@@ -150,7 +151,7 @@ export default function ReleasePage() {
             {release.type} • {release.date}
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">
+          <h1 className="text-4xl md:text-5xl font-bold mb-3">
             {release.title}
           </h1>
 
@@ -186,7 +187,9 @@ export default function ReleasePage() {
               return (
                 <div
                   key={track.id}
-                  onClick={() => !isUnavailable && handleTrackClick(track.id, track.audioSrc)}
+                  onClick={() =>
+                    !isUnavailable && handleTrackClick(track.id, track.audioSrc)
+                  }
                   className={`rounded-2xl border px-4 py-3 transition-all duration-300 ${
                     isActive
                       ? "border-brand-primary bg-white/10 shadow-[0_0_18px_rgba(255,255,255,0.05)]"
@@ -279,6 +282,6 @@ export default function ReleasePage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageContainer>
   );
 }

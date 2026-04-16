@@ -1,6 +1,7 @@
 import { EVENTS } from "../constants/data";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { MediaCard } from "../components/Mediacard";
+import { PageContainer } from "../components/layout/PageContainer";
 
 export default function EventsPage() {
   const sortedEvents = [...EVENTS].sort(
@@ -8,10 +9,10 @@ export default function EventsPage() {
   );
 
   return (
-    <div className="min-h-screen pt-28 px-6 md:px-10 max-w-6xl mx-auto text-white">
-      <h1 className="text-4xl font-bold mb-6">Events</h1>
-      <p className="text-brand-text-muted mb-10">
-        Explore upcoming and past State Alchemy events.
+    <PageContainer>
+      <h1 className="text-4xl md:text-5xl font-bold">Events</h1>
+      <p className="text-brand-text-muted mt-4 mb-10">
+        Explore upcoming and past State Alchemy rituals.
       </p>
 
       {sortedEvents.length === 0 ? (
@@ -24,37 +25,25 @@ export default function EventsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="group"
+              className="h-full"
             >
-              <Link to={`/events/${event.slug}`}>
-                <div className="overflow-hidden rounded-xl border border-white/10 bg-white/5">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                    />
-                  </div>
-
-                  <div className="p-5">
-                    <h2 className="text-xl font-semibold group-hover:text-brand-primary transition">
-                      {event.title}
-                    </h2>
-
-                    <p className="text-sm text-brand-text-muted mt-2">
-                      {event.date}
-                    </p>
-
-                    <p className="text-sm text-brand-text-muted">
-                      {event.venue}, {event.location}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <MediaCard
+                image={event.image}
+                title={event.title}
+                subtitle={`${event.venue}, ${event.location}`}
+                metaLeft="Event"
+                metaRight={new Date(event.date).toLocaleDateString("en-ZA", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
+                link={`/events/${event.slug}`}
+                imageAspect="aspect-[4/3]"
+              />
             </motion.div>
           ))}
         </div>
       )}
-    </div>
+    </PageContainer>
   );
 }

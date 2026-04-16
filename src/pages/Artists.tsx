@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { ARTISTS } from "../constants/data";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MediaCard } from "../components/Mediacard";
 import { Instagram, Music } from "lucide-react";
+import { PageContainer } from "../components/layout/PageContainer";
 
 const filters = ["All", "Live", "DJ"] as const;
 type Filter = typeof filters[number];
@@ -21,11 +21,10 @@ export default function Artists() {
       : sortedArtists.filter((a) => a.category === filter);
 
   return (
-    <div className="min-h-screen pt-28 px-6 md:px-10 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6">Artists</h1>
-
-      <p className="text-brand-text-muted mb-6">
-        The State Alchemy roster.
+    <PageContainer>
+      <h1 className="text-4xl md:text-5xl font-bold">Artists</h1>
+      <p className="text-brand-text-muted mt-4 mb-10">
+        Explore the artists behind State Alchemy.
       </p>
 
       <div className="flex flex-wrap gap-3 mb-10">
@@ -60,32 +59,35 @@ export default function Artists() {
               link={`/artists/${artist.slug}`}
               footer={
                 <>
-                  {artist.socials.instagram && artist.socials.instagram !== "#" && (
-                    <a
-                      href={artist.socials.instagram}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      <Instagram className="w-4 h-4" />
-                    </a>
-                  )}
-                  {artist.socials.soundcloud && artist.socials.soundcloud !== "#" && (
-                    <a
-                      href={artist.socials.soundcloud}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="hover:text-brand-primary transition-colors"
-                    >
-                      <Music className="w-4 h-4" />
-                    </a>
-                  )}
+                  {artist.socials.instagram &&
+                    artist.socials.instagram !== "#" && (
+                      <a
+                        href={artist.socials.instagram}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="hover:text-brand-primary transition-colors"
+                      >
+                        <Instagram className="w-4 h-4" />
+                      </a>
+                    )}
+
+                  {artist.socials.soundcloud &&
+                    artist.socials.soundcloud !== "#" && (
+                      <a
+                        href={artist.socials.soundcloud}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="hover:text-brand-primary transition-colors"
+                      >
+                        <Music className="w-4 h-4" />
+                      </a>
+                    )}
                 </>
               }
             />
           </motion.div>
         ))}
       </div>
-    </div>
+    </PageContainer>
   );
 }
