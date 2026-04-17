@@ -4,6 +4,7 @@ import {
   SkipBack,
   SkipForward,
   Volume2,
+  Loader2,
 } from "lucide-react";
 import { useAudioPlayer } from "../context/AudioPlayerContext";
 
@@ -20,6 +21,8 @@ export default function GlobalAudioPlayer() {
   const {
     currentTrack,
     isPlaying,
+    isBuffering,
+    audioError,
     togglePlayPause,
     playNext,
     playPrevious,
@@ -55,7 +58,7 @@ export default function GlobalAudioPlayer() {
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-xs text-white/40">
-                  No Art
+                  No artwork
                 </div>
               )}
             </div>
@@ -64,9 +67,13 @@ export default function GlobalAudioPlayer() {
               <p className="truncate text-sm font-medium text-white">
                 {currentTrack?.title || "No track selected"}
               </p>
-              <p className="truncate text-xs text-white/60">
-                {currentTrack?.artist || "Choose a track from a release"}
-              </p>
+              {audioError ? (
+                <p className="truncate text-xs text-red-400">{audioError}</p>
+              ) : (
+                <p className="truncate text-xs text-white/60">
+                  {currentTrack?.artist || "Choose a track from a release"}
+                </p>
+              )}
             </div>
           </div>
 
@@ -83,10 +90,17 @@ export default function GlobalAudioPlayer() {
 
               <button
                 onClick={togglePlayPause}
-                disabled={!currentTrack}
+                disabled={!currentTrack || isBuffering}
+                aria-label={isBuffering ? "Loading" : isPlaying ? "Pause" : "Play"}
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black transition hover:scale-105 disabled:opacity-40"
               >
-                {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+                {isBuffering ? (
+                  <Loader2 size={20} className="animate-spin" />
+                ) : isPlaying ? (
+                  <Pause size={20} />
+                ) : (
+                  <Play size={20} />
+                )}
               </button>
 
               <button
@@ -111,6 +125,10 @@ export default function GlobalAudioPlayer() {
                 value={currentTime}
                 onChange={handleSeek}
                 disabled={!currentTrack}
+                aria-label="Seek track position"
+                aria-valuenow={currentTime}
+                aria-valuemin={0}
+                aria-valuemax={duration || 0}
                 className="h-1 w-full cursor-pointer appearance-none rounded-full bg-white/15 accent-white disabled:opacity-40"
               />
 
@@ -130,6 +148,10 @@ export default function GlobalAudioPlayer() {
               step={0.01}
               value={volume}
               onChange={handleVolume}
+              aria-label="Volume"
+              aria-valuenow={volume}
+              aria-valuemin={0}
+              aria-valuemax={1}
               className="h-1 w-28 cursor-pointer appearance-none rounded-full bg-white/15 accent-white"
             />
           </div>

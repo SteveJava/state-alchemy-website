@@ -4,16 +4,18 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 
 import Layout from "./components/layout/Layout";
 import { AudioPlayerProvider } from "./context/AudioPlayerContext";
 
-import { HomePage } from "./pages/HomePage";
-import Artists from "./pages/Artists";
-import ReleasesPage from "./pages/ReleasesPage";
-import ReleasePage from "./pages/ReleasePage";
-import EventsPage from "./pages/EventsPage";
+const HomePage = lazy(() => import("./pages/HomePage").then(m => ({ default: m.HomePage })));
+const Artists = lazy(() => import("./pages/Artists"));
+const ReleasesPage = lazy(() => import("./pages/ReleasesPage"));
+const ReleasePage = lazy(() => import("./pages/ReleasePage"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
+const ArtistPage = lazy(() => import("./pages/ArtistPage"));
+const EventPage = lazy(() => import("./pages/EventPage"));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -40,15 +42,19 @@ function App() {
     <AudioPlayerProvider>
       <Router>
         <ScrollToTop />
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/artists" element={<Artists />} />
-            <Route path="/releases" element={<ReleasesPage />} />
-            <Route path="/releases/:slug" element={<ReleasePage />} />
-            <Route path="/events" element={<EventsPage />} />
-          </Route>
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/artists" element={<Artists />} />
+              <Route path="/artists/:slug" element={<ArtistPage />} />
+              <Route path="/releases" element={<ReleasesPage />} />
+              <Route path="/releases/:slug" element={<ReleasePage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/events/:slug" element={<EventPage />} />
+            </Route>
+          </Routes>
+        </Suspense>
       </Router>
     </AudioPlayerProvider>
   );

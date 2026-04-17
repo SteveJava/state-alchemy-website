@@ -8,7 +8,17 @@ export default function ArtistPage() {
   const artist = ARTISTS.find((a) => a.slug === slug);
 
   if (!artist) {
-    return <div className="p-10">Artist not found</div>;
+    return (
+      <PageContainer>
+        <div className="flex flex-col items-center justify-center py-32 text-center">
+          <p className="text-6xl mb-6">404</p>
+          <h1 className="text-2xl font-bold mb-3">Artist not found</h1>
+          <p className="text-brand-text-muted mb-8">
+            The artist you're looking for doesn't exist or may have been removed.
+          </p>
+        </div>
+      </PageContainer>
+    );
   }
 
   return (

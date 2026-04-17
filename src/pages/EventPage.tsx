@@ -10,7 +10,13 @@ export default function EventPage() {
   if (!event) {
     return (
       <PageContainer>
-        <p className="text-xl">Event not found</p>
+        <div className="flex flex-col items-center justify-center py-32 text-center">
+          <p className="text-6xl mb-6">404</p>
+          <h1 className="text-2xl font-bold mb-3">Event not found</h1>
+          <p className="text-brand-text-muted mb-8">
+            The event you're looking for doesn't exist or may have been removed.
+          </p>
+        </div>
       </PageContainer>
     );
   }

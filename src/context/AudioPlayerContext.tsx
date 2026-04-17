@@ -21,6 +21,8 @@ type AudioPlayerContextType = {
   currentTrack: PlayerTrack | null;
   currentIndex: number;
   isPlaying: boolean;
+  isBuffering: boolean;
+  audioError: string | null;
   currentTime: number;
   duration: number;
   volume: number;
@@ -44,6 +46,8 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
   const [currentTrack, setCurrentTrack] = useState<PlayerTrack | null>(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(false);
+  const [audioError, setAudioError] = useState<string | null>(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolumeState] = useState(1);
@@ -57,6 +61,8 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
 
     const audio = audioRef.current;
     const nextSrc = track.audioSrc;
+
+    setAudioError(null);
 
     if (audio.src !== window.location.origin + nextSrc) {
       audio.src = nextSrc;
@@ -80,6 +86,25 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
 
     const handleLoadedMetadata = () => {
       setDuration(audio.duration || 0);
+    };
+
+    const handleWaiting = () => setIsBuffering(true);
+    const handlePlaying = () => setIsBuffering(false);
+    const handleCanPlay = () => setIsBuffering(false);
+
+    const handleError = () => {
+      setIsBuffering(false);
+      setIsPlaying(false);
+      const code = audio.error?.code;
+      if (code === MediaError.MEDIA_ERR_NETWORK) {
+        setAudioError("Network error — check your connection.");
+      } else if (code === MediaError.MEDIA_ERR_DECODE) {
+        setAudioError("This track couldn't be decoded.");
+      } else if (code === MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED) {
+        setAudioError("Track unavailable.");
+      } else {
+        setAudioError("Playback failed.");
+      }
     };
 
     const handleEnded = () => {
@@ -107,12 +132,20 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
 
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("waiting", handleWaiting);
+    audio.addEventListener("playing", handlePlaying);
+    audio.addEventListener("canplay", handleCanPlay);
+    audio.addEventListener("error", handleError);
     audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.pause();
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("waiting", handleWaiting);
+      audio.removeEventListener("playing", handlePlaying);
+      audio.removeEventListener("canplay", handleCanPlay);
+      audio.removeEventListener("error", handleError);
       audio.removeEventListener("ended", handleEnded);
     };
   }, [loadAndPlayTrack]);
@@ -242,6 +275,8 @@ export function AudioPlayerProvider({ children }: { children: ReactNode }) {
         currentTrack,
         currentIndex,
         isPlaying,
+        isBuffering,
+        audioError,
         currentTime,
         duration,
         volume,

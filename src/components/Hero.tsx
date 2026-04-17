@@ -11,11 +11,16 @@ export const Hero = () => {
     >
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/images/home-banner.jpg"
-          alt="State Alchemy event atmosphere"
-          className="w-full h-full object-cover object-center scale-105"
-        />
+        <picture>
+          <source srcSet="/images/home-banner.webp" type="image/webp" />
+          <img
+            src="/images/home-banner.jpg"
+            alt="State Alchemy event atmosphere"
+            className="w-full h-full object-cover object-center scale-105"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </div>
 
       {/* Dark overlay */}
@@ -43,9 +48,9 @@ export const Hero = () => {
           className="mb-8 inline-block"
         >
           <div className="w-32 h-32 md:w-48 md:h-48 mx-auto relative">
-            <div className="absolute inset-0 border-2 border-brand-primary/20 rounded-full animate-[spin_10s_linear_infinite]" />
-            <div className="absolute inset-4 border-2 border-brand-secondary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-            <div className="absolute inset-8 border-2 border-brand-accent-pink/20 rounded-full animate-[spin_20s_linear_infinite]" />
+            <div aria-hidden="true" className="absolute inset-0 border-2 border-brand-primary/20 rounded-full animate-[spin_10s_linear_infinite]" />
+            <div aria-hidden="true" className="absolute inset-4 border-2 border-brand-secondary/20 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
+            <div aria-hidden="true" className="absolute inset-8 border-2 border-brand-accent-pink/20 rounded-full animate-[spin_20s_linear_infinite]" />
 
             <motion.img
               src="/images/SAM.png"
