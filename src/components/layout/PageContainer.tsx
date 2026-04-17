@@ -1,13 +1,9 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
-type PageContainerProps = {
-  children: ReactNode;
-};
-
-export function PageContainer({ children }: PageContainerProps) {
+export const PageContainer = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen pt-28 px-6 max-w-7xl mx-auto text-white">
+    <div className="w-full max-w-6xl mx-auto px-6 md:px-10 pt-28 pb-20">
       {children}
     </div>
   );
-}
+};

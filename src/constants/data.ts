@@ -118,6 +118,17 @@ export const ARTISTS: Artist[] = [
     category: 'Live',
     socials: { instagram: '#', soundcloud: '#' }
   },
+  {
+    id: 'live-7',
+    slug: 'key-to-insaniity',
+    name: 'Key To Insaniity',
+    bio: 'Hitech Producer - Psychedelic Explorer - Subsonic Alchemist.',
+    image: '/images/artists/liveActs/keyToInsaniity.jpg',
+    genres: ['Hitech Psytrance'],
+    featured: false,
+    category: 'Live',
+    socials: { instagram: '#', spotify: '#' }
+  },
   // DJ Acts
   {
     id: 'dj-1',

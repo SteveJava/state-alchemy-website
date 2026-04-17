@@ -25,7 +25,7 @@ export const MediaCard = ({
 }: MediaCardProps) => {
   const content = (
     <Card className="group h-full flex flex-col overflow-hidden">
-      <div className={`${imageAspect} overflow-hidden relative flex-shrink-0`}>
+      <div className={`${imageAspect} relative overflow-hidden flex-shrink-0`}>
         <img
           src={image}
           alt={title}
@@ -35,34 +35,44 @@ export const MediaCard = ({
         />
       </div>
 
-      <div className="p-6 flex-grow flex flex-col justify-between">
+      <div className="p-6 flex flex-1 flex-col justify-between">
         <div>
           {(metaLeft || metaRight) && (
-            <div className="flex justify-between items-start mb-2 gap-2">
+            <div className="mb-2 flex items-start justify-between gap-2">
               {metaLeft && (
-                <span className="text-[10px] uppercase tracking-widest px-2 py-1 border border-brand-primary/30 rounded text-brand-primary">
+                <span className="rounded border border-brand-primary/30 px-2 py-1 text-[10px] uppercase tracking-widest text-brand-primary">
                   {metaLeft}
                 </span>
               )}
               {metaRight && (
-                <span className="text-xs text-brand-text-muted">{metaRight}</span>
+                <span className="text-xs text-brand-text-muted">
+                  {metaRight}
+                </span>
               )}
             </div>
           )}
 
-          <h3 className="text-xl font-bold mb-1 group-hover:text-brand-primary transition-colors">
+          <h3 className="mb-1 text-xl font-bold transition-colors group-hover:text-brand-primary">
             {title}
           </h3>
 
           {subtitle && (
-            <p className="text-brand-text-muted text-sm">{subtitle}</p>
+            <p className="text-sm text-brand-text-muted">{subtitle}</p>
           )}
         </div>
 
-        {footer && <div className="flex gap-3 mt-4">{footer}</div>}
+        {footer && <div className="mt-4 flex gap-3">{footer}</div>}
       </div>
     </Card>
   );
 
-  return link ? <Link to={link}>{content}</Link> : content;
+  if (link && link.trim() !== "" && link !== "#") {
+    return (
+      <Link to={link} className="block h-full">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 };
