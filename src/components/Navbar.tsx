@@ -46,7 +46,7 @@ export const Navbar = () => {
           scrolled ? "glass py-4" : "bg-transparent py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <div className="px-6 md:px-10 flex justify-between items-center">
           {/* Logo */}
           <Link
             to="/"

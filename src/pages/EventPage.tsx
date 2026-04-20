@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { EVENTS } from "../constants/data";
-import { Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, ArrowLeft } from "lucide-react";
 import { PageContainer } from "../components/layout/PageContainer";
 
 export default function EventPage() {
@@ -23,14 +23,23 @@ export default function EventPage() {
 
   return (
     <PageContainer>
-      {/* Optional inner width constraint for better readability */}
+      <div className="mb-8">
+        <Link
+          to="/events"
+          className="inline-flex items-center gap-2 text-sm text-brand-text-muted transition hover:text-white"
+        >
+          <ArrowLeft size={16} />
+          Back to Events
+        </Link>
+      </div>
+
       <div className="max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div>
             <img
               src={event.image}
               alt={event.title}
-              className="w-full max-w-xl rounded-xl mb-6"
+              className="w-full max-w-xl rounded-md mb-6"
             />
           </div>
 
@@ -56,7 +65,7 @@ export default function EventPage() {
             </div>
 
             {event.description && (
-              <p className="text-brand-text-muted leading-relaxed mb-6">
+              <p className="text-base md:text-lg text-brand-text-muted leading-relaxed mb-6">
                 {event.description}
               </p>
             )}

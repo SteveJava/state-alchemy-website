@@ -17,7 +17,7 @@ export const HomePage = () => {
       <Divider />
       <ArtistsSection featuredOnly={true} />
       <Divider />
-      <EventsSection limit={3} />
+      <EventsSection />
       <Divider />
       <AboutSection />
     </>

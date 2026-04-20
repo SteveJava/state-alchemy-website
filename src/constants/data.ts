@@ -129,6 +129,17 @@ export const ARTISTS: Artist[] = [
     category: 'Live',
     socials: { instagram: '#', spotify: '#' }
   },
+  {
+    id: 'live-8',
+    slug: 'akuum',
+    name: 'Akuum',
+    bio: 'Deep hypnotic techno with psychedelic textures and tribal rhythms.',
+    image: '/images/artists/dj/akuum.jpg',
+    genres: ['Hypnotic Techno', 'Tribal'],
+    featured: true,
+    category: 'Live',
+    socials: { soundcloud: '#', spotify: '#' }
+  },
   // DJ Acts
   {
     id: 'dj-1',
@@ -151,17 +162,6 @@ export const ARTISTS: Artist[] = [
     featured: false,
     category: 'DJ',
     socials: { instagram: '#', soundcloud: '#' }
-  },
-  {
-    id: 'dj-3',
-    slug: 'akuum',
-    name: 'Akuum',
-    bio: 'Deep hypnotic techno with psychedelic textures and tribal rhythms.',
-    image: '/images/artists/dj/akuum.jpg',
-    genres: ['Hypnotic Techno', 'Tribal'],
-    featured: true,
-    category: 'DJ',
-    socials: { soundcloud: '#', spotify: '#' }
   },
   {
     id: 'dj-4',
@@ -190,7 +190,7 @@ export const ARTISTS: Artist[] = [
     slug: 'intropin',
     name: 'Intropin',
     bio: 'Fast-paced rhythmic structures and cerebral textures.',
-    image: '/images/artists/dj/intropin.png',
+    image: '/images/artists/dj/intropin.jpg',
     genres: ['Fast Techno', 'Cerebral'],
     featured: false,
     category: 'DJ',
@@ -619,7 +619,7 @@ export const EVENTS: Event[] = [
     title: 'Binary Botany Feat. Karev & Alchemy Circle',
     date: '2024-09-07',
     location: 'Cape Town',
-    venue: 'colorbox Studios',
+    venue: 'Colorbox Studios',
     image: '/images/events/binaryBotanyKarev/binaryBotanyKarev.jpg',
     link: '#'
   },
@@ -629,7 +629,7 @@ export const EVENTS: Event[] = [
     title: 'Binary Botany Feat. Rinkadink & Akari System',
     date: '2024-06-08',
     location: 'Cape Town',
-    venue: 'colorbox Studios',
+    venue: 'Colorbox Studios',
     image: '/images/events/binaryBotanyRinkadink/binaryBotanyRinkadink.jpg',
     link: '#'
   },
@@ -639,7 +639,7 @@ export const EVENTS: Event[] = [
     title: 'Binary Botany Feat. Creepy Deep',
     date: '2024-03-30',
     location: 'Cape Town',
-    venue: 'colorbox Studios',
+    venue: 'Colorbox Studios',
     image: '/images/events/binaryBotanyCreepyDeep/binaryBotanyCreepyDeep.jpg',
     link: '#'
   },

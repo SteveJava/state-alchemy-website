@@ -1,6 +1,6 @@
 import { EVENTS } from "../constants/data";
-import { motion } from "framer-motion";
-import { MediaCard } from "../components/Mediacard";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
 
 export default function EventsPage() {
@@ -21,39 +21,59 @@ export default function EventsPage() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.25),rgba(0,0,0,0.65),rgba(0,0,0,0.9))]" />
       </div>
     <PageContainer>
-      <h1 className="text-4xl md:text-5xl font-bold">Events</h1>
-      <p className="text-brand-text-muted mt-4 mb-10">
-        Explore upcoming and past State Alchemy rituals.
-      </p>
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="text-center mb-10"
+      >
+        <p className="mb-4 text-xs uppercase tracking-[0.35em] text-brand-primary/80">
+          The Rituals
+        </p>
+        <h1 className="text-4xl md:text-6xl font-bold leading-[0.95] tracking-tight">
+          Events
+        </h1>
+        <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-brand-text-muted leading-relaxed">
+          Explore upcoming and past State Alchemy rituals.
+        </p>
+      </motion.div>
 
       {sortedEvents.length === 0 ? (
         <p className="text-brand-text-muted">No events available yet.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <AnimatePresence mode="popLayout">
           {sortedEvents.map((event, idx) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="h-full"
+              layout
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ delay: idx * 0.04, duration: 0.25 }}
             >
-              <MediaCard
-                image={event.image}
-                title={event.title}
-                subtitle={`${event.venue}, ${event.location}`}
-                metaLeft="Event"
-                metaRight={new Date(event.date).toLocaleDateString("en-ZA", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-                link={`/events/${event.slug}`}
-                imageAspect="aspect-[4/3]"
-              />
+              <Link to={`/events/${event.slug}`} className="group block">
+                <article className="relative overflow-hidden rounded-md">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+                      <p className="text-xl font-bold text-white">{event.title}</p>
+                      <p className="mt-1 text-sm text-white/70">{event.venue}</p>
+                    </div>
+                  </div>
+                </article>
+              </Link>
             </motion.div>
           ))}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       )}
     </PageContainer>
     </div>

@@ -50,7 +50,7 @@ interface SectionProps {
 }
 
 export const Section = ({ children, title, subtitle, className = '', id }: SectionProps) => (
-  <section id={id} className={`py-20 px-6 max-w-7xl mx-auto ${className}`}>
+  <section id={id} className={`py-20 px-6 md:px-10 ${className}`}>
     {(title || subtitle) && (
       <div className="mb-12">
         {subtitle && <p className="text-brand-primary font-display text-sm uppercase tracking-widest mb-2">{subtitle}</p>}
