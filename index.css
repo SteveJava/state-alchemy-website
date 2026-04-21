@@ -51,11 +51,21 @@
 }
 
 .glass {
-  @apply bg-brand-surface/60 backdrop-blur-md border border-white/5;
+  @apply bg-brand-surface/80 backdrop-blur-md border border-white/5;
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .glass {
+    background-color: rgb(18 18 18 / 0.97);
+  }
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary via-brand-accent-pink to-brand-secondary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  @apply bg-gradient-to-r from-brand-primary via-brand-accent-pink to-brand-secondary;
 }
 
 .glow-primary {

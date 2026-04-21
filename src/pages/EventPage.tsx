@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
-import { EVENTS } from "../constants/data";
+import { EVENTS } from "../constants/events";
 import { Calendar, MapPin, ArrowLeft } from "lucide-react";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 
 export default function EventPage() {
   const { slug } = useParams();
@@ -36,11 +37,13 @@ export default function EventPage() {
       <div className="max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           <div>
-            <img
-              src={event.image}
-              alt={event.title}
-              className="w-full max-w-xl rounded-md mb-6"
-            />
+            <div className="relative w-full max-w-xl overflow-hidden rounded-md mb-6">
+              <SkeletonImage
+                src={event.image}
+                alt={event.title}
+                className="w-full object-cover"
+              />
+            </div>
           </div>
 
           <div>

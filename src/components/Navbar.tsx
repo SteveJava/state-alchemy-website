@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { name: "Artists", href: "/artists" },
   { name: "Music", href: "/releases" },
   { name: "Events", href: "/events" },
+  { name: "Booking", href: "/contact" },
 ];
 
 export const Navbar = () => {
@@ -102,34 +103,37 @@ export const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              id="mobile-navigation"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute top-full left-0 w-full glass border-t border-white/5 flex flex-col p-6 gap-6 md:hidden max-h-[80vh] overflow-y-auto"
-            >
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  onClick={handleLinkClick}
-                  className={`text-lg font-display uppercase tracking-widest transition-colors ${
-                    location.pathname === link.href
-                      ? "text-brand-primary"
-                      : "text-brand-text-muted hover:text-brand-primary"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
+
+      {/* Mobile Menu — fixed sibling to avoid absolute-inside-fixed issues on iOS/Android */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            id="mobile-navigation"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className={`fixed left-0 right-0 z-40 glass border-t border-white/5 flex flex-col p-6 gap-6 md:hidden max-h-[80vh] overflow-y-auto ${
+              scrolled ? "top-[64px]" : "top-[80px]"
+            }`}
+          >
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={handleLinkClick}
+                className={`text-lg font-display uppercase tracking-widest transition-colors ${
+                  location.pathname === link.href
+                    ? "text-brand-primary"
+                    : "text-brand-text-muted hover:text-brand-primary"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

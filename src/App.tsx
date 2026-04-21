@@ -16,6 +16,7 @@ const ReleasePage = lazy(() => import("./pages/ReleasePage"));
 const EventsPage = lazy(() => import("./pages/EventsPage"));
 const ArtistPage = lazy(() => import("./pages/ArtistPage"));
 const EventPage = lazy(() => import("./pages/EventPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -52,6 +53,7 @@ function App() {
               <Route path="/releases/:slug" element={<ReleasePage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/events/:slug" element={<EventPage />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Route>
           </Routes>
         </Suspense>

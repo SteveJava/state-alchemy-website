@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { ARTISTS } from "../constants/data";
+import { ARTISTS } from "../constants/artists";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 
 const filters = ["All", "Live", "DJ"] as const;
 type Filter = (typeof filters)[number];
@@ -80,12 +81,10 @@ export default function Artists() {
               >
                 <Link to={`/artists/${artist.slug}`} className="group block">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-md">
-                    <img
+                    <SkeletonImage
                       src={artist.image}
                       alt={artist.name}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">

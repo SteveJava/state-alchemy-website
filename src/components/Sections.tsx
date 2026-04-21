@@ -2,7 +2,10 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Section } from "./ui/Base";
 import { MediaCard } from "./Mediacard";
-import { ARTISTS, RELEASES, EVENTS } from "../constants/data";
+import { SkeletonImage } from "./ui/SkeletonImage";
+import { ARTISTS } from "../constants/artists";
+import { RELEASES } from "../constants/releases";
+import { EVENTS } from "../constants/events";
 import { Instagram, Music, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -193,16 +196,14 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
             <Link
               key={artist.id}
               to={`/artists/${artist.slug}`}
-              className="group flex-shrink-0 w-[360px]"
+              className="group flex-shrink-0 w-[72vw] sm:w-[300px] lg:w-[360px]"
               style={{ scrollSnapAlign: "start" }}
             >
               <div className="relative aspect-[3/4] overflow-hidden rounded-md">
-                <img
+                <SkeletonImage
                   src={artist.image}
                   alt={artist.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
@@ -306,17 +307,15 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
           <Link
             key={release.id}
             to={`/releases/${release.slug}`}
-            className="group flex-shrink-0 w-[460px]"
+            className="group flex-shrink-0 w-[78vw] sm:w-[360px] lg:w-[460px]"
             style={{ scrollSnapAlign: "start" }}
           >
             <article className="relative overflow-hidden rounded-md">
               <div className="relative aspect-square overflow-hidden">
-                <img
+                <SkeletonImage
                   src={release.cover}
                   alt={release.title}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
@@ -412,17 +411,15 @@ export const EventsSection = ({ limit }: EventsSectionProps) => {
             <Link
               key={event.id}
               to={`/events/${event.slug}`}
-              className="group flex-shrink-0 w-[520px]"
+              className="group flex-shrink-0 w-[85vw] sm:w-[440px] lg:w-[520px]"
               style={{ scrollSnapAlign: "start" }}
             >
               <article className="relative overflow-hidden rounded-md">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
+                  <SkeletonImage
                     src={event.image}
                     alt={event.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">

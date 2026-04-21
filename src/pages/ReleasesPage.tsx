@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
-import { RELEASES } from "../constants/data";
+import { RELEASES } from "../constants/releases";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 
 const filters = ["All", "Album", "EP", "Single", "Compilation"] as const;
 type Filter = typeof filters[number];
@@ -96,7 +97,7 @@ export default function ReleasesPage() {
                     <Link to={`/releases/${release.slug}`} className="group block h-full">
                       <article className="relative overflow-hidden rounded-md">
                         <div className="relative aspect-square overflow-hidden">
-                          <img
+                          <SkeletonImage
                             src={release.cover}
                             alt={release.title}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

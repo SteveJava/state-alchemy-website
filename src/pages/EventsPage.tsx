@@ -1,7 +1,8 @@
-import { EVENTS } from "../constants/data";
+import { EVENTS } from "../constants/events";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 
 export default function EventsPage() {
   const sortedEvents = [...EVENTS].sort(
@@ -41,7 +42,7 @@ export default function EventsPage() {
       {sortedEvents.length === 0 ? (
         <p className="text-brand-text-muted">No events available yet.</p>
       ) : (
-        <motion.div layout className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           <AnimatePresence mode="popLayout">
           {sortedEvents.map((event, idx) => (
             <motion.div
@@ -55,12 +56,10 @@ export default function EventsPage() {
               <Link to={`/events/${event.slug}`} className="group block">
                 <article className="relative overflow-hidden rounded-md">
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
+                    <SkeletonImage
                       src={event.image}
                       alt={event.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">

@@ -1,6 +1,7 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "./ui/Base";
+import { SkeletonImage } from "./ui/SkeletonImage";
 
 interface MediaCardProps {
   image: string;
@@ -23,21 +24,13 @@ export const MediaCard = ({
   footer,
   imageAspect = "aspect-square",
 }: MediaCardProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
   const content = (
     <Card className="group h-full flex flex-col overflow-hidden">
       <div className={`${imageAspect} relative overflow-hidden flex-shrink-0 bg-white/5`}>
-        {!imageLoaded && (
-          <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-white/5 to-white/10" />
-        )}
-        <img
+        <SkeletonImage
           src={image}
           alt={title}
-          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setImageLoaded(true)}
+          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
         />
       </div>
 

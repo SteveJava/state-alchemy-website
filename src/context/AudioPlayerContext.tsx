@@ -14,6 +14,7 @@ export type PlayerTrack = {
   audioSrc: string;
   cover?: string;
   slug?: string;
+  artistSlug?: string;
 };
 
 type AudioPlayerContextType = {

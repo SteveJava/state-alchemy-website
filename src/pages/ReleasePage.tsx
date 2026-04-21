@@ -1,7 +1,9 @@
 import { useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { RELEASES, ARTISTS } from "../constants/data";
+import { RELEASES } from "../constants/releases";
+import { ARTISTS } from "../constants/artists";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 import { ArrowLeft, Calendar, Disc3, Play, Pause } from "lucide-react";
 import { useAudioPlayer } from "../context/AudioPlayerContext";
 import { motion } from "framer-motion";
@@ -50,6 +52,7 @@ export default function ReleasePage() {
     artist: release.artist,
     cover: release.cover,
     slug: release.slug,
+    artistSlug,
   }));
 
   const handleTrackClick = (track: { title: string; audioSrc: string }) => {
@@ -64,6 +67,7 @@ export default function ReleasePage() {
           artist: release.artist,
           cover: release.cover,
           slug: release.slug,
+          artistSlug,
         },
         playerQueue
       );
@@ -100,8 +104,8 @@ export default function ReleasePage() {
           className="flex flex-col items-center text-center"
         >
           {/* Cover */}
-          <div className="w-64 h-64 md:w-96 md:h-96 rounded-md overflow-hidden shadow-[0_12px_80px_rgba(0,0,0,0.8)] mb-8">
-            <img
+          <div className="relative w-64 h-64 md:w-96 md:h-96 rounded-md overflow-hidden shadow-[0_12px_80px_rgba(0,0,0,0.8)] mb-8">
+            <SkeletonImage
               src={release.cover}
               alt={`${release.title} cover`}
               className="w-full h-full object-cover"
@@ -143,28 +147,6 @@ export default function ReleasePage() {
               </>
             )}
           </div>
-
-          {/* Description */}
-          {release.description && (
-            <>
-              <div className="w-12 h-px bg-white/10 my-5" />
-              <p className="max-w-xl mx-auto text-base md:text-lg leading-relaxed text-brand-text-muted mb-5">
-                {release.description}
-              </p>
-            </>
-          )}
-
-          {/* External link */}
-          {release.link && release.link !== "#" && (
-            <a
-              href={release.link}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-2 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10"
-            >
-              Open External Link
-            </a>
-          )}
 
           {/* Tracklist */}
           {tracks.length > 0 && (
@@ -212,6 +194,28 @@ export default function ReleasePage() {
                 })}
               </div>
             </section>
+          )}
+
+          {/* Description */}
+          {release.description && (
+            <>
+              <div className="w-12 h-px bg-white/10 my-5" />
+              <p className="max-w-xl mx-auto text-base md:text-lg leading-relaxed text-brand-text-muted mb-5 whitespace-pre-line">
+                {release.description}
+              </p>
+            </>
+          )}
+
+          {/* External link */}
+          {release.link && release.link !== "#" && (
+            <a
+              href={release.link}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition hover:border-white/30 hover:bg-white/10"
+            >
+              Buy on Bandcamp
+            </a>
           )}
         </motion.div>
       </PageContainer>

@@ -1,12 +1,19 @@
 import { useParams, Link } from "react-router-dom";
-import { ARTISTS } from "../constants/data";
+import { ARTISTS } from "../constants/artists";
+import { RELEASES } from "../constants/releases";
 import { Instagram, Music, ArrowLeft } from "lucide-react";
 import { PageContainer } from "../components/layout/PageContainer";
+import { SkeletonImage } from "../components/ui/SkeletonImage";
 import { motion } from "framer-motion";
 
 export default function ArtistPage() {
   const { slug } = useParams();
   const artist = ARTISTS.find((a) => a.slug === slug);
+  const discography = artist
+    ? [...RELEASES]
+        .filter((r) => r.artist.toLowerCase().includes(artist.name.toLowerCase()))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    : [];
 
   if (!artist) {
     return (
@@ -49,8 +56,8 @@ export default function ArtistPage() {
           className="flex flex-col items-center text-center max-w-lg mx-auto"
         >
           {/* Avatar */}
-          <div className="w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden ring-2 ring-white/10 mb-6">
-            <img
+          <div className="relative w-52 h-52 md:w-64 md:h-64 rounded-full overflow-hidden ring-2 ring-white/10 mb-6">
+            <SkeletonImage
               src={artist.image}
               alt={artist.name}
               className="w-full h-full object-cover object-top"
@@ -72,16 +79,8 @@ export default function ArtistPage() {
             {artist.genres.join(" · ")}
           </p>
 
-          {/* Divider */}
-          <div className="w-12 h-px bg-white/10 mb-6" />
-
-          {/* Bio */}
-          <p className="text-base md:text-lg text-brand-text-muted leading-relaxed mb-8">
-            {artist.bio}
-          </p>
-
           {/* Socials */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 mb-6">
             {artist.socials.instagram && artist.socials.instagram !== "#" && (
               <a
                 href={artist.socials.instagram}
@@ -107,7 +106,59 @@ export default function ArtistPage() {
               </a>
             )}
           </div>
+
+          {/* Divider */}
+          <div className="w-12 h-px bg-white/10 mb-6" />
+
+          {/* Bio */}
+          <p className="text-base md:text-lg text-brand-text-muted leading-relaxed mb-8 whitespace-pre-line">
+            {artist.bio}
+          </p>
         </motion.div>
+
+        {discography.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-16 pb-16"
+          >
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <h2 className="text-xl font-semibold">Discography</h2>
+              <p className="text-sm text-brand-text-muted">
+                {discography.length} release{discography.length === 1 ? "" : "s"}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {discography.map((release, idx) => (
+                <motion.div
+                  key={release.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + idx * 0.04, duration: 0.25 }}
+                >
+                  <Link to={`/releases/${release.slug}`} className="group block h-full">
+                    <article className="relative overflow-hidden rounded-md">
+                      <div className="relative aspect-square overflow-hidden">
+                        <SkeletonImage
+                          src={release.cover}
+                          alt={release.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 text-center drop-shadow-[0_2px_12px_rgba(0,0,0,1)]">
+                          <p className="text-sm font-bold text-white">{release.title}</p>
+                          <p className="mt-0.5 text-xs text-white/60">{release.type}</p>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+        )}
       </PageContainer>
     </div>
   );
