@@ -35,25 +35,30 @@ export const Footer = () => {
             <h4 className="font-display uppercase tracking-widest text-sm mb-6">
               Navigation
             </h4>
-            <ul className="space-y-4 text-brand-text-muted text-sm text-left">
-              <li>
+            <ul className="space-y-3 text-brand-text-muted text-sm text-left">
+              <li className="flex items-center h-4">
                 <Link to="/" className="hover:text-brand-primary transition-colors">
                   Home
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center h-4">
                 <Link to="/artists" className="hover:text-brand-primary transition-colors">
                   Artists
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center h-4">
                 <Link to="/releases" className="hover:text-brand-primary transition-colors">
                   Music
                 </Link>
               </li>
-              <li>
+              <li className="flex items-center h-4">
                 <Link to="/events" className="hover:text-brand-primary transition-colors">
                   Events
+                </Link>
+              </li>
+              <li className="flex items-center h-4">
+                <Link to="/contact" className="hover:text-brand-primary transition-colors">
+                  Booking
                 </Link>
               </li>
             </ul>
