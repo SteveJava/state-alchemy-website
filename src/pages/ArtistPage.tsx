@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { ARTISTS } from "../constants/artists";
 import { RELEASES } from "../constants/releases";
 import { Instagram, Music, ArrowLeft } from "lucide-react";
@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 
 export default function ArtistPage() {
   const { slug } = useParams();
+  const { state: navState } = useLocation();
   const artist = ARTISTS.find((a) => a.slug === slug);
   const discography = artist
     ? [...RELEASES]
@@ -41,11 +42,11 @@ export default function ArtistPage() {
       <PageContainer>
         <div className="mb-8">
           <Link
-            to="/artists"
+            to={navState?.from === "home" ? "/" : "/artists"}
             className="inline-flex items-center gap-2 text-sm text-brand-text-muted transition hover:text-white"
           >
             <ArrowLeft size={16} />
-            Back to Artists
+            {navState?.from === "home" ? "Back to Home" : "Back to Artists"}
           </Link>
         </div>
 
@@ -138,7 +139,7 @@ export default function ArtistPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + idx * 0.04, duration: 0.25 }}
                 >
-                  <Link to={`/releases/${release.slug}`} className="group block h-full">
+                  <Link to={`/releases/${release.slug}`} state={{ from: "artist" }} className="group block h-full">
                     <article className="relative overflow-hidden rounded-md">
                       <div className="relative aspect-square overflow-hidden">
                         <SkeletonImage

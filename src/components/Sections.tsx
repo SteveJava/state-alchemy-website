@@ -91,6 +91,8 @@ const SectionLinkButton = ({ to }: { to: string }) => (
 export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+  const indexRef = useRef(0);
+  const lastScrollRef = useRef(0);
 
   let displayArtists = (category ? ARTISTS.filter((a) => a.category === category) : ARTISTS)
     .slice()
@@ -100,12 +102,12 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
     if (!featuredOnly) return;
     const interval = setInterval(() => {
       if (paused || !scrollRef.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        scrollRef.current.scrollBy({ left: 284, behavior: "smooth" });
-      }
+      if (Date.now() - lastScrollRef.current < 500) return;
+      const items = Array.from(scrollRef.current.children) as HTMLElement[];
+      if (!items.length) return;
+      indexRef.current = (indexRef.current + 1) % items.length;
+      lastScrollRef.current = Date.now();
+      scrollRef.current.scrollTo({ left: items[indexRef.current].offsetLeft, behavior: "smooth" });
     }, 3000);
     return () => clearInterval(interval);
   }, [featuredOnly, paused]);
@@ -196,6 +198,7 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
             <Link
               key={artist.id}
               to={`/artists/${artist.slug}`}
+              state={{ from: "home" }}
               className="group flex-shrink-0 w-[72vw] sm:w-[300px] lg:w-[360px]"
               style={{ scrollSnapAlign: "start" }}
             >
@@ -227,16 +230,18 @@ export const ArtistsSection = ({ featuredOnly = false, category }: ArtistsSectio
 export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+  const indexRef = useRef(0);
+  const lastScrollRef = useRef(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (paused || !scrollRef.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        scrollRef.current.scrollBy({ left: 484, behavior: "smooth" });
-      }
+      if (Date.now() - lastScrollRef.current < 500) return;
+      const items = Array.from(scrollRef.current.children) as HTMLElement[];
+      if (!items.length) return;
+      indexRef.current = (indexRef.current + 1) % items.length;
+      lastScrollRef.current = Date.now();
+      scrollRef.current.scrollTo({ left: items[indexRef.current].offsetLeft, behavior: "smooth" });
     }, 3000);
     return () => clearInterval(interval);
   }, [paused]);
@@ -307,6 +312,7 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
           <Link
             key={release.id}
             to={`/releases/${release.slug}`}
+            state={{ from: "home" }}
             className="group flex-shrink-0 w-[78vw] sm:w-[360px] lg:w-[460px]"
             style={{ scrollSnapAlign: "start" }}
           >
@@ -340,6 +346,8 @@ export const ReleasesSection = ({ type, limit }: ReleasesSectionProps) => {
 export const EventsSection = ({ limit }: EventsSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+  const indexRef = useRef(0);
+  const lastScrollRef = useRef(0);
 
   let displayEvents = [...EVENTS].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -352,12 +360,12 @@ export const EventsSection = ({ limit }: EventsSectionProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (paused || !scrollRef.current) return;
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      if (scrollLeft + clientWidth >= scrollWidth - 10) {
-        scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        scrollRef.current.scrollBy({ left: 540, behavior: "smooth" });
-      }
+      if (Date.now() - lastScrollRef.current < 500) return;
+      const items = Array.from(scrollRef.current.children) as HTMLElement[];
+      if (!items.length) return;
+      indexRef.current = (indexRef.current + 1) % items.length;
+      lastScrollRef.current = Date.now();
+      scrollRef.current.scrollTo({ left: items[indexRef.current].offsetLeft, behavior: "smooth" });
     }, 3000);
     return () => clearInterval(interval);
   }, [paused]);
@@ -411,6 +419,7 @@ export const EventsSection = ({ limit }: EventsSectionProps) => {
             <Link
               key={event.id}
               to={`/events/${event.slug}`}
+              state={{ from: "home" }}
               className="group flex-shrink-0 w-[85vw] sm:w-[440px] lg:w-[520px]"
               style={{ scrollSnapAlign: "start" }}
             >

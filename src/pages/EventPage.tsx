@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { EVENTS } from "../constants/events";
 import { Calendar, MapPin, ArrowLeft } from "lucide-react";
 import { PageContainer } from "../components/layout/PageContainer";
@@ -6,6 +6,7 @@ import { SkeletonImage } from "../components/ui/SkeletonImage";
 
 export default function EventPage() {
   const { slug } = useParams();
+  const { state: navState } = useLocation();
   const event = EVENTS.find((e) => e.slug === slug);
 
   if (!event) {
@@ -26,11 +27,11 @@ export default function EventPage() {
     <PageContainer>
       <div className="mb-8">
         <Link
-          to="/events"
+          to={navState?.from === "home" ? "/" : "/events"}
           className="inline-flex items-center gap-2 text-sm text-brand-text-muted transition hover:text-white"
         >
           <ArrowLeft size={16} />
-          Back to Events
+          {navState?.from === "home" ? "Back to Home" : "Back to Events"}
         </Link>
       </div>
 

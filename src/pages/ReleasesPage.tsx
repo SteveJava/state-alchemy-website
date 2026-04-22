@@ -94,7 +94,7 @@ export default function ReleasesPage() {
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ delay: idx * 0.04, duration: 0.25 }}
                   >
-                    <Link to={`/releases/${release.slug}`} className="group block h-full">
+                    <Link to={`/releases/${release.slug}`} state={{ from: "releases" }} className="group block h-full">
                       <article className="relative overflow-hidden rounded-md">
                         <div className="relative aspect-square overflow-hidden">
                           <SkeletonImage

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { RELEASES } from "../constants/releases";
 import { ARTISTS } from "../constants/artists";
 import { PageContainer } from "../components/layout/PageContainer";
@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 
 export default function ReleasePage() {
   const { slug } = useParams();
+  const { state: navState } = useLocation();
 
   const release = useMemo(
     () => RELEASES.find((r) => r.slug === slug),
@@ -89,11 +90,11 @@ export default function ReleasePage() {
       <PageContainer>
         <div className="mb-8">
           <Link
-            to="/releases"
+            to={navState?.from === "artist" && artistSlug ? `/artists/${artistSlug}` : navState?.from === "home" ? "/" : "/releases"}
             className="inline-flex items-center gap-2 text-sm text-brand-text-muted transition hover:text-white"
           >
             <ArrowLeft size={16} />
-            Back to Releases
+            {navState?.from === "artist" && artistSlug ? "Back to Artist" : navState?.from === "home" ? "Back to Home" : "Back to Releases"}
           </Link>
         </div>
 
@@ -150,11 +151,11 @@ export default function ReleasePage() {
 
           {/* Tracklist */}
           {tracks.length > 0 && (
-            <section className="w-full mt-12">
-              <div className="border-b border-white/5 pb-3 mb-2 grid grid-cols-[2rem_1fr_auto] gap-4 px-4 text-xs uppercase tracking-widest text-brand-text-muted text-left">
+            <section className="w-full mt-12 md:max-w-2xl md:mx-auto">
+              <div className="border-b border-white/5 pb-3 mb-2 grid grid-cols-[2rem_1fr] md:grid-cols-[2rem_1fr_5rem] gap-4 px-4 text-xs uppercase tracking-widest text-brand-text-muted text-left">
                 <span className="text-center">#</span>
                 <span>Title</span>
-                <span>Status</span>
+                <span className="hidden md:block">Status</span>
               </div>
 
               <div className="space-y-1">
@@ -166,7 +167,7 @@ export default function ReleasePage() {
                     <button
                       key={track.id}
                       onClick={() => handleTrackClick(track)}
-                      className={`group w-full grid grid-cols-[2rem_1fr_auto] gap-4 items-center px-4 py-3 rounded-md text-left transition-all duration-200 ${
+                      className={`group w-full grid grid-cols-[2rem_1fr] md:grid-cols-[2rem_1fr_5rem] gap-4 items-center px-4 py-3 rounded-md text-left transition-all duration-200 ${
                         isCurrentTrack ? "bg-white/10" : "hover:bg-white/5"
                       }`}
                     >
@@ -182,11 +183,16 @@ export default function ReleasePage() {
                         </span>
                       </div>
 
-                      <span className={`text-sm font-medium truncate ${isCurrentTrack ? "text-brand-primary" : "text-white"}`}>
-                        {track.title}
-                      </span>
+                      <div className="flex flex-col min-w-0">
+                        <span className={`text-sm font-medium truncate ${isCurrentTrack ? "text-brand-primary" : "text-white"}`}>
+                          {track.title}
+                        </span>
+                        <span className="text-xs text-brand-text-muted truncate mt-0.5">
+                          {track.artist}
+                        </span>
+                      </div>
 
-                      <span className="text-xs uppercase tracking-[0.15em] text-brand-text-muted">
+                      <span className="hidden md:block text-xs uppercase tracking-[0.15em] text-brand-text-muted">
                         {isCurrentTrack ? (isPlaying ? "Playing" : "Paused") : ""}
                       </span>
                     </button>
